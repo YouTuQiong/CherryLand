@@ -1,0 +1,138 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{{ name }} - GoodLand</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="{% static 'blog/js/fontawesome.js' %} "></script>
+    <link rel="stylesheet" href="{% static 'blog/css/reset.css' %}">
+    <link rel='stylesheet' type="text/css" href="{% static 'blog/css/bootstrap.css' %}">
+    <link rel='stylesheet' type="text/css" href="{% static 'blog/css/style.css' %}">
+        <script src="{% static 'blog/js/jquery.min.js' %} "></script>
+    <script href="{% static 'blog/js/bootstrap.min.js' %}"></script>
+</head>
+<body>
+<div class="wrap">
+<header class="header">
+    <header class="header-item header-srp">
+        <div class="header__logo"></div>
+            <li class="header__nav-item_status_active"><a href="{% url 'Category' 1 %}">技术</a></li>
+            <li><a href="{% url 'archives' %}">归档</a></li>
+            {#            <li>还没做</li>#}
+        <div class="header__item__right">
+{#           pip install fabric#}
+                <li><a href="https://github.com/youTuQiong" target="_blank" title="GitHub" class="fa fa-github "></a>
+                </li>
+                <li><a href="#" target="_blank" title="gentlemen.zhang@gmail.com" class="fa fa-envelope"></a>
+                </li>
+                <li><a class="fa fa-search" id="search"></a></li>
+        </div>
+    </header>
+</header>
+<div class="container">
+    <div class="fuck">
+        <div class="card">
+            <div class="center-icon">
+                <img src="{% static 'blog/img/user.jpg' %}">
+            </div>
+            <div class="blogname">Good Land</div>
+        </div>
+        <div class="othermenu">
+            <ul>
+                <li><a href="{% url 'reader' %}">我的文章</a></li>
+                <li><a href="{% url 'mygays' %}">牛逼哄哄的朋友</a></li>
+                <li><a href="{% url 'about' %}">关于我</a></li>
+                <li></li>
+            </ul>
+        </div>
+        <div class="textwidget">
+            <p>{{ phrase|safe }}</p>
+        </div>
+    </div>
+
+
+    <div class="content">
+        <h1 class="archive-title">{{ name }}
+            <small>（目前共计 {{ count }} 篇文章）</small>
+        </h1>
+        <div class="archive-content">
+            {% for Article in post_list %}
+
+                <a class="archive-item list-group-item"
+                   href="{{ Article.get_absolute_url }}"><span class="bagde">●   </span>{{ Article.title }} </a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+</div>
+ <div class="page">
+        <ul class="pagination">
+            <!-- 第一页 -->
+            {% if post_list.number == 1 %}
+                <li>
+                    <a class=" fa fa-angle-double-left "></a>
+                </li>
+            {% else %}
+                <li>
+                    <a class=" fa fa-angle-double-left " href="?{{ query_params.urlencode }}&page=1"></a>
+                </li>
+            {% endif %}
+            <!-- 上一页 -->
+            {% if post_list.has_previous %}
+                <li>
+                    <a class=" fa fa-angle-left "
+                       href="?{{ query_params.urlencode }}&page={{ post_list.previous_page_number }}"></a>
+                </li>
+            {% else %}
+                <li>
+                    <a class=" fa fa-angle-left "></a>
+                </li>
+            {% endif %}
+
+            <!-- 当前页/总页数 -->
+            <li class="nowPage">
+                <a> {{ post_list.number }} of {{ post_list.paginator.num_pages }}</a>
+            </li>
+
+            <!-- 下一页 -->
+            {% if post_list.has_next %}
+                <li><a class=" fa fa-angle-right "
+                       href="?{{ query_params.urlencode }}&page={{ post_list.next_page_number }}">
+                </a></li>
+            {% else %}
+                <li>
+                    <a class=" fa fa-angle-right "></a>
+                </li>
+            {% endif %}
+
+            <!-- 最后一页 -->
+            <li><a class="fa fa-angle-double-right pa"
+                   href="?{{ query_params.urlencode }}&page={{ post_list.paginator.num_pages }}">
+            </a>
+            </li>
+            <li><input type="text" id="pagenum"
+                       style="    width: 34px;height: 34px; border-color: #0a68a3;    float: left;"> <a>go</a></li>
+            <li></li>
+        </ul>
+    </div>
+<footer id="foot" class="fw">
+    <div id="bottom" class="fw">
+        <div id="footer" class="wc center clf">
+            <div class="info">
+                <p>Copyleft 2017 <a href="#">Cherry Land</a>. Proudly published with <a
+                        href="https://https://www.djangoproject.com/" target="_blank">Django</a>. Made with ❤ by
+                    TuQiong.</p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+<div class="go-top" id="gotop">
+      <span class="fa fa-angle-up"></span>
+    </div>
+
+</body>
+<script type="text/javascript" src="{% static 'blog/js/indexeffct.js' %}"></script>
+</html>

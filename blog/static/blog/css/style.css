@@ -1,0 +1,418 @@
+body {
+    /*background: url("../img/logo1.png");*/
+    background-color: #f2f2f2;
+    /*background: url("../img/backgroud.png") no-repeat;*/
+    text-shadow: 0 0 1px rgba(0, 0, 0, 0.22);
+    height: 100%;
+}
+
+/*BEM*/
+.header {
+    background-color: #00acc1;
+    box-shadow: 2px 2px 5px #f6f6f6;
+    border-top: 8px solid #007c91;
+}
+
+.main {
+    flex: 1;
+}
+
+.header-item {
+    padding-left: 20px;
+    margin: auto;
+    height: 70px;
+    width: 1000px;
+    text-align: center;
+}
+
+.header-srp {
+    /*top: 50%;*/
+    /*margin-top: -17px;*/
+}
+
+.container {
+
+    width: 1000px;
+    margin: auto;
+}
+
+.pageframe {
+}
+
+.header__logo {
+    float: left;
+    width: 200px;
+    height: 80px;
+    font-size: 20px;
+    text-indent: 50px;
+    background: url("../img/logo-3.png") left center no-repeat;
+    margin-right: 80px;
+}
+
+.header-item li {
+    margin-right: 40px;
+    display: block;
+    float: left;
+    line-height: 77px;
+    font-size: 20px;
+    position: relative;
+}
+
+.header__item__right li {
+    margin-right: 18px;
+    display: block;
+    float: left;
+    line-height: 77px;
+    font-size: 30px;
+    position: relative;
+}
+
+.header-item a {
+    color: #FFFFFF;
+}
+
+.header-item a:hover {
+    color: #000;
+    cursor: pointer;
+}
+
+.ca {
+    color: #000;
+}
+
+/*.fa {*/
+/*padding-right: 40px;*/
+/*display: block;*/
+/*float: left;*/
+/*height: 50px;*/
+/*width: 50px;*/
+/*line-height: 77px;*/
+/*position: relative;*/
+/*}*/
+
+.header__item__right {
+    width: 200px;
+    float: right;
+    top: 50%;
+    /*margin-top: -53px;*/
+    padding-left: 60px;
+}
+
+.pageframe {
+
+}
+
+.container {
+    padding: 0px;
+    /*background-color: #f6f6f6;*/
+    margin-top: 40px;
+    width: 1000px;
+}
+
+.fuck {
+    background-color: #FFFFFF;
+    float: left;
+    width: 250px;
+    height: 370px;
+    margin-right: 30px;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    /*background: url("../img/id-card.png");*/
+}
+
+.center-icon {
+    margin-top: 25px;
+    text-align: center;
+}
+
+a:hover {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.card {
+    border: none;
+}
+
+.center-icon img {
+    border-radius: 56px;
+    width: 120px;
+    height: 120px;
+}
+
+.blogname {
+    height: 40px;
+    font-size: 22px;
+    padding: 5px 0;
+    text-align: center;
+    color: #666;
+    margin-top: 10px;
+}
+
+.othermenu {
+    margin: 35px 35px;
+
+}
+
+.othermenu ul {
+    list-style: none;
+    display: block;
+    width: 100%;
+    border-top: 1px dashed #e0e0e0;
+}
+
+.othermenu li {
+    font-size: 15px;
+    border-top: 1px dashed #e0e0e0;
+    display: block;
+    width: 100%;
+    padding: 7px 0;
+    text-align: center;
+    color: #757575;
+}
+
+.textwidget {
+    padding: 25px;
+    font-size: 12px;
+    word-wrap: break-word;
+    word-break: normal;
+    border: 3px solid rgba(79, 195, 247, 0.39);
+    background-color: #FFFFFF;
+}
+
+/*.othermenu:hover {*/
+/*cursor: pointer;*/
+/*}*/
+
+p {
+
+    margin-bottom: 7px;
+}
+
+.content {
+
+    width: 720px;
+    float: right;
+    background-color: #ffffff;
+    padding: 20px;
+    padding-top: 0;
+    margin-bottom: 30px;
+}
+
+a {
+    color: #1b1f23;
+    text-decoration: none
+
+}
+
+　　 a:link {
+    text-decoration: none;
+    color: blue
+}
+
+　　 a:active {
+    text-decoration: none
+}
+
+　　 a:hover {
+    text-decoration: none;
+    color: red
+}
+
+　　 a:visited {
+    text-decoration: none;
+    color: green
+}
+
+.entry-title a {
+    font-size: 20px;
+}
+
+h1.entry-title {
+    border-bottom: 1.5px dashed #6d667e;
+    font-size: 18px;
+    padding: 10px 0px 20px;
+    letter-spacing: 1.5px
+}
+
+.fa-bookmark:before {
+    margin-right: 10px;
+}
+
+.fa-comment:before {
+    margin-right: 10px;
+}
+
+.fa-tags:before {
+    margin-right: 10px;
+}
+
+.fa-clock-o:before {
+    margin-right: 10px;
+}
+
+.fa-eye:before {
+    margin-right: 10px;
+}
+
+.entry-meta span {
+    padding-top: 10px;
+    padding-right: 15px;
+}
+
+.entry-meta {
+    font-size: 14px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.post-content {
+    overflow: hidden;
+    padding: 20px;
+    border-bottom: 1.5px dashed #6d667e;
+}
+
+.fa {
+}
+
+.ga:hover {
+    color: #ffffff;
+}
+
+.header-item li:hover {
+    color: #ffffff;
+}
+
+h1.archive-title {
+    padding-bottom: 20px;
+    border-bottom: 1.5px dashed #6d667e;
+}
+
+.archive-content {
+    padding-top: 20px;
+}
+
+.archive-item {
+
+}
+
+pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.ga {
+    font-size: 30px;
+    padding-right: 7px;
+}
+
+.active {
+    font-size: 20px;
+}
+
+small {
+    font-size: 40%;
+!important;
+}
+
+.content-father:after {
+    content: ".";
+    height: 0;
+    visibility: hidden;
+    display: block;
+    clear: both;
+}
+
+.pagination {
+    text-align: center;
+}
+
+.page {
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+input#pagenum {
+    width: 34px;
+    height: 34px;
+}
+
+.reader {
+    padding-bottom: 30px;
+}
+
+.othermenu a {
+    font-size: 12px;
+}
+
+#foot {
+    border-top: 8px solid #00acc1;
+    background: #007c91;
+}
+
+.social .ico a, .topmenu li a, #footer .info {
+    color: #bedbec;
+    font-family: 'Alegreya', Georgia, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    padding: 21px 0 14px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.gd {
+    position: fixed; /*固定作用*/
+    top: 0px;
+    left: 490px;
+    /*ie6下样式，加下划线表示只针对ie6 的hack */
+    _position: absolute; /* 把导航栏位置定义为绝对位置  关键*/
+    z-index: 9999; /* 让导航栏浮在网页的高层位置，遇到flash和图片时候也能始终保持最外层 */
+    text-align: left;
+}
+
+.go-top {
+    width: 35px;
+    height: 35px;
+    background: #fff;
+    -webkit-box-shadow: 0 2px 7px rgba(0, 0, 0, 0.28);
+    box-shadow: 0 2px 7px rgba(0, 0, 0, 0.28);
+    border-radius: 18px;
+    /* font-size: 35px; */
+    position: fixed;
+    bottom: -100px;
+    right: 21px;
+    text-align: center;
+    color: #666;
+    cursor: pointer;
+    z-index: 750;
+    -webkit-transform: translateZ(0);
+    transition-property: bottom;
+    transition-duration: .2s;
+    /* transition-timing-function: ease-in-out; */
+    transition-delay: 0s;
+    bottom: 28px;
+}
+
+.go-top .fa {
+    font-size: 28px;
+    line-height: 35px;
+    display: block;
+    vertical-align: middle;
+}
+
+.search {
+    width: 200px;
+    margin-top: 28px;
+    margin-left: 200px;
+}
+
+html, body {
+    height: 100%;
+}
+
+.footer {
+    margin-top: -30px;
+    height: 30px;
+    background-color: #eee;
+}
+
+.wrap {
+    min-height: 100%
+}
