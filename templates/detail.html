@@ -2,78 +2,86 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>{{ Article.title }}</title>
+    <title>{{ Article.title }} ———— CherryLand</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href={% static 'favicon.ico' %} />
     <script src="{% static 'blog/js/fontawesome.js' %} "></script>
-    <link rel="stylesheet" href="{% static 'blog/css/reset.css' %}">
-        <script src="{% static 'blog/js/jquery.min.js' %} "></script>
-    <link rel='stylesheet' type="text/css" href="{% static 'blog/css/bootstrap.css' %}">
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <link href="https://cdn.bootcss.com/minireset.css/0.0.2/minireset.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'blog/css/font-awesome.min.css' %}">
     <link rel='stylesheet' type="text/css" href="{% static 'blog/css/style.css' %}">
 </head>
 <body>
 <div class="wrap">
-<header class="header">
-    <header class="header-item header-srp">
-        <div class="header__logo"></div>
+    <header class="header">
+        <header class="header-item header-srp">
+            <div class="header__logo"></div>
             <li class="header__nav-item_status_active"><a href="{% url 'Category' 1 %}">技术</a></li>
             <li><a href="{% url 'archives' %}">归档</a></li>
             {#            <li>还没做</li>#}
-        <div class="header__item__right">
-{#           pip install fabric#}
+            <div class="header__item__right">
+                {#           pip install fabric#}
                 <li><a href="https://github.com/youTuQiong" target="_blank" title="GitHub" class="fa fa-github "></a>
                 </li>
                 <li><a href="#" target="_blank" title="gentlemen.zhang@gmail.com" class="fa fa-envelope"></a>
                 </li>
                 <li><a class="fa fa-search" id="search"></a></li>
-        </div>
-    </header>
-</header>
-</header>
-<div class="container">
-    <div class="fuck">
-        <div class="card">
-            <div class="center-icon">
-                <img src="{% static 'blog/img/user.jpg' %}">
             </div>
-            <div class="blogname">Good Land</div>
-        </div>
-        <div class="othermenu">
-            <ul>
-                <li><a>我的文章</a></li>
-                <li><a>gays</a></li>
-                <li>关于我</li>
-                <li></li>
-            </ul>
-        </div>
-        <div class="textwidget">
-            <p>Django内容</p>
-        </div>
-    </div>
-
-    <div class="content">
-        <article class="post post-{{ Article.pk }}">
-            <header class="entry-header">
-                <h1 class="entry-title"><a>{{ Article.title }}</a></h1>
-                <div class="post-content">{{ Article.body |safe }}</div>
-                <div class="entry-meta">
-                    <span class="post-category"><i class="fa fa-bookmark"
-                                                   aria-hidden="true"></i>{{ Article.category.name }}</span>
-                    <span class="post-date"><i class="fa fa-clock-o" aria-hidden="true"></i><span><time
-                            class="entry-date"
-                            datetime="{{ Article.created_time }}">{{ Article.created_time }}</time></span></span>
-                    <span class="post-tag"><i class="fa fa-tags"
-                                              aria-hidden="true"></i><span>{% for tag in Article.tags.all %}{{ tag }},{% endfor %}</span></span>
-                    <span class="comments-link" style="display: none"><i class="fa fa-comment" aria-hidden="true"></i> 222</span>
-                    <span class="views-count"> <i class="fa fa-eye" aria-hidden="true"></i> {{ Article.views }}</span>
+        </header>
+    </header>
+    </header>
+    <div class="container">
+        <div class="fuck">
+            <div class="card">
+                <div class="center-icon">
+                    <img src="{% static 'blog/img/user.jpg' %}">
                 </div>
-            </header>
+                <div class="blogname">Good Land</div>
+            </div>
+            <div class="othermenu">
+                <ul>
+                    <li><a>我的文章</a></li>
+                    <li><a>gays</a></li>
+                    <li>关于我</li>
+                    <li></li>
+                </ul>
+            </div>
+            <div class="textwidget">
+                <p>Django内容</p>
+            </div>
+        </div>
 
-        </article>
+        <div class="content">
+            <article class="post post-{{ Article.pk }}">
+                <header class="entry-header">
+                    <h1 class="entry-title"><a>{{ Article.title }}</a></h1>
+                    <div class="post-content">{{ Article.retrunBody }}</div>
+                    <div class="entry-meta">
+                    <span class="post-category"><i class="fa fa-bookmark"
+                                                   aria-hidden="true"></i><a
+                                                                         href="{% url 'Category' Article.category.pk %}">{{ Article.category.name }} </a></span>
+                        <span class="post-date"><i class="fa fa-clock-o" aria-hidden="true"></i><span><time
+                                class="entry-date"
+                                datetime="{{ Article.created_time }}">{{ Article.created_time }}</time></span></span>
+                        <span class="post-tag"><i class="fa fa-tags"
+                                                  aria-hidden="true"></i>{% for tag in Article.tags.all %}
+                            <a href="{% url 'Tag' tag.pk %}">{{ tag }}   {% endfor %}</a></span>
+                        <span class="comments-link" style="display: none"><i class="fa fa-comment"
+                                                                             aria-hidden="true"></i> 222</span>
+                        <span class="views-count"> <i class="fa fa-eye"
+                                                      aria-hidden="true"></i> {{ Article.views }}</span>
+                    </div>
+                </header>
 
+            </article>
+
+        </div>
     </div>
 </div>
-</div>
+<div style="clear:both;"></div>
+
 <div id="foot" class="fw">
     <div id="bottom" class="fw">
         <div id="footer" class="wc center clf">
@@ -87,8 +95,8 @@
 
 </div>
 <div class="go-top" id="gotop">
-      <span class="fa fa-angle-up"></span>
-    </div>
+    <span class="fa fa-angle-up"></span>
+</div>
 </body>
 <script type="text/javascript" src="{% static 'blog/js/indexeffct.js' %}"></script>
 </html>

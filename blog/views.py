@@ -45,6 +45,7 @@ def detail(request, pk):
 def archives(request):
     post_list = Article.objects.all().order_by('-created_time')
     datalist = Article.objects.datetimes('created_time', 'year', 'DESC')
+    datalist = reversed(datalist)
     count = len(post_list)
     dataContentlist = []
     for i in datalist:

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="{% static 'blog/js/fontawesome.js' %} "></script>
+    <link rel='stylesheet' type="text/css" href="{% static 'blog/css/font-awesome.min.css' %} ">
     <script src="{% static 'blog/js/jquery.min.js' %} "></script>
     <link rel="stylesheet" href="{% static 'blog/css/reset.css' %}">
     <link rel='stylesheet' type="text/css" href="{% static 'blog/css/bootstrap.css' %}">
@@ -12,126 +12,127 @@
 </head>
 <body>
 <div class="wrap">
-<header class="header">
-    <header class="header-item header-srp">
-        <div class=""> <a class="header__logo" href="{{ 'index.html' }}">
+    <header class="header">
+        <header class="header-item header-srp">
+            <div class=""><a class="header__logo" href="{{ 'index.html' }}">
 
-        </a></div>
+            </a></div>
             <li class="header__nav-item_status_active"><a href="{% url 'Category' 1 %}">技术</a></li>
             <li><a href="{% url 'archives' %}">归档</a></li>
             {#            <li>还没做</li>#}
-        <div class="header__item__right">
-{#           pip install fabric#}
+            <div class="header__item__right">
+                {#           pip install fabric#}
                 <li><a href="https://github.com/youTuQiong" target="_blank" title="GitHub" class="fa fa-github "></a>
                 </li>
                 <li><a href="#" target="_blank" title="gentlemen.zhang@gmail.com" class="fa fa-envelope"></a>
                 </li>
                 <li><a class="fa fa-search" id="search"></a></li>
-        </div>
-    </header>
-</header>
-<div class="container">
-    <div class="fuck">
-        <div class="card">
-            <div class="center-icon">
-                <img src="{% static 'blog/img/user.jpg' %}">
             </div>
-            <div class="blogname">Good Land</div>
+        </header>
+    </header>
+    <div class="container">
+        <div class="fuck">
+            <div class="card">
+                <div class="center-icon">
+                    <img src="{% static 'blog/img/user.jpg' %}">
+                </div>
+                <div class="blogname">Good Land</div>
+            </div>
+            <div class="othermenu">
+                <ul>
+                    <li><a href="reader.html">我的文章</a></li>
+                    <li><a href="mygays.html">牛逼哄哄的朋友</a></li>
+                    <li><a href="about.html">关于我</a></li>
+                    <li></li>
+                </ul>
+            </div>
+            <div class="textwidget" id="textfloat">
+                <p>{{ phrase|safe }}</p>
+            </div>
         </div>
-        <div class="othermenu">
-            <ul>
-                <li><a href="reader.html">我的文章</a></li>
-                <li><a href="mygays.html">牛逼哄哄的朋友</a></li>
-                <li><a href="about.html">关于我</a></li>
+
+
+        <div class="content-father">
+            {% for Article in post_list %}
+                <div class="content">
+                    <article class="post post-{{ Article.pk }}">
+                        <h1 class="entry-title">
+                            <a href="{{ Article.get_absolute_url }}">{{ Article.title }}</a>
+                        </h1>
+                    </article>
+                    <div class="post-content">
+                        {{ Article.excerpt|safe }}
+                    </div>
+                    <div class="entry-meta">
+                        <span class="post-category"><a class="fa fa-bookmark" aria-hidden="true"
+                                                       href="{% url 'Category' Article.category.pk %}">{{ Article.category.name }} </a></span>
+                        <span class="post-date"><i class="fa fa-clock-o" aria-hidden="true"></i><span><time
+                                class="entry-date"
+                                datetime="{{ Article.created_time }}">{{ Article.created_time }}</time></span></span>
+                        <span class="post-tag"><i class="fa fa-tags"
+                                                  aria-hidden="true"></i>{% for tag in Article.tags.all %}
+                            <a href="{% url 'Tag' tag.pk %}">{{ tag }}   {% endfor %}</a></span>
+                        <span class="comments-link" style="display: none"><i class="fa fa-comment"
+                                                                             aria-hidden="true"></i> 222</span>
+                        <span class="views-count"> <i class="fa fa-eye"
+                                                      aria-hidden="true"></i> {{ Article.views }}</span>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="no-post">暂时还没有发布的文章！</div>
+            {% endfor %}
+        </div>
+        <div class="page">
+            <ul class="pagination">
+                <!-- 第一页 -->
+                {% if post_list.number == 1 %}
+                    <li>
+                        <a class=" fa fa-angle-double-left "></a>
+                    </li>
+                {% else %}
+                    <li>
+                        <a class=" fa fa-angle-double-left " href="?{{ query_params.urlencode }}&page=1"></a>
+                    </li>
+                {% endif %}
+                <!-- 上一页 -->
+                {% if post_list.has_previous %}
+                    <li>
+                        <a class=" fa fa-angle-left "
+                           href="?{{ query_params.urlencode }}&page={{ post_list.previous_page_number }}"></a>
+                    </li>
+                {% else %}
+                    <li>
+                        <a class=" fa fa-angle-left "></a>
+                    </li>
+                {% endif %}
+
+                <!-- 当前页/总页数 -->
+                <li class="nowPage">
+                    <a> {{ post_list.number }} of {{ post_list.paginator.num_pages }}</a>
+                </li>
+
+                <!-- 下一页 -->
+                {% if post_list.has_next %}
+                    <li><a class=" fa fa-angle-right "
+                           href="?{{ query_params.urlencode }}&page={{ post_list.next_page_number }}">
+                    </a></li>
+                {% else %}
+                    <li>
+                        <a class=" fa fa-angle-right "></a>
+                    </li>
+                {% endif %}
+
+                <!-- 最后一页 -->
+                <li><a class="fa fa-angle-double-right pa"
+                       href="?{{ query_params.urlencode }}&page={{ post_list.paginator.num_pages }}">
+                </a>
+                </li>
+                <li><input type="text" id="pagenum"
+                           style="    width: 34px;height: 34px; border-color: #0a68a3;    float: left;"> <a>go</a></li>
                 <li></li>
             </ul>
         </div>
-        <div class="textwidget" id="textfloat">
-            <p>{{ phrase|safe }}</p>
-        </div>
     </div>
-
-
-    <div class="content-father">
-        {% for Article in post_list %}
-            <div class="content">
-                <article class="post post-{{ Article.pk }}">
-                    <h1 class="entry-title">
-                        <a href="{{ Article.get_absolute_url }}">{{ Article.title }}</a>
-                    </h1>
-                </article>
-                <div class="post-content">
-                    {{ Article.excerpt|safe }}
-                </div>
-                <div class="entry-meta">
-                <span class="post-category"><a class="fa fa-bookmark" aria-hidden="true"
-                                               href="{% url 'Category' Article.category.pk %}"> {{ Article.category.name }}</span></a>
-                    <span class="post-date"><i class="fa fa-clock-o" aria-hidden="true"></i><span><time
-                            class="entry-date"
-                            datetime="{{ Article.created_time }}">{{ Article.created_time }}</time></span></span>
-                    <span class="post-tag"><i class="fa fa-tags"
-                                              aria-hidden="true"></i>{% for tag in Article.tags.all %}
-                        <a href="{% url 'Tag' tag.pk %}">{{ tag }}   {% endfor %}</a></span>
-                    <span class="comments-link" style="display: none"><i class="fa fa-comment"
-                                                                         aria-hidden="true"></i> 222</span>
-                    <span class="views-count"> <i class="fa fa-eye" aria-hidden="true"></i> {{ Article.views }}</span>
-                </div>
-            </div>
-        {% empty %}
-            <div class="no-post">暂时还没有发布的文章！</div>
-        {% endfor %}
-    </div>
-    <div class="page">
-        <ul class="pagination">
-            <!-- 第一页 -->
-            {% if post_list.number == 1 %}
-                <li>
-                    <a class=" fa fa-angle-double-left "></a>
-                </li>
-            {% else %}
-                <li>
-                    <a class=" fa fa-angle-double-left " href="?{{ query_params.urlencode }}&page=1"></a>
-                </li>
-            {% endif %}
-            <!-- 上一页 -->
-            {% if post_list.has_previous %}
-                <li>
-                    <a class=" fa fa-angle-left "
-                       href="?{{ query_params.urlencode }}&page={{ post_list.previous_page_number }}"></a>
-                </li>
-            {% else %}
-                <li>
-                    <a class=" fa fa-angle-left "></a>
-                </li>
-            {% endif %}
-
-            <!-- 当前页/总页数 -->
-            <li class="nowPage">
-                <a> {{ post_list.number }} of {{ post_list.paginator.num_pages }}</a>
-            </li>
-
-            <!-- 下一页 -->
-            {% if post_list.has_next %}
-                <li><a class=" fa fa-angle-right "
-                       href="?{{ query_params.urlencode }}&page={{ post_list.next_page_number }}">
-                </a></li>
-            {% else %}
-                <li>
-                    <a class=" fa fa-angle-right "></a>
-                </li>
-            {% endif %}
-
-            <!-- 最后一页 -->
-            <li><a class="fa fa-angle-double-right pa"
-                   href="?{{ query_params.urlencode }}&page={{ post_list.paginator.num_pages }}">
-            </a>
-            </li>
-            <li><input type="text" id="pagenum"
-                       style="    width: 34px;height: 34px; border-color: #0a68a3;    float: left;"> <a>go</a></li>
-            <li></li>
-        </ul>
-    </div>
-</div>
 </div>
 <div id="foot" class="fw">
     <div id="bottom" class="fw">
@@ -146,8 +147,8 @@
 
 </div>
 <div class="go-top" id="gotop">
-      <span class="fa fa-angle-up"></span>
-    </div>
+    <span class="fa fa-angle-up"></span>
+</div>
 </body>
 <script type="text/javascript" src="{% static 'blog/js/indexeffct.js' %}"></script>
 </html>

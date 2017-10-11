@@ -32,7 +32,9 @@ INSTALLED_APPS = [
     'easy_thumbnails',
     'filer',
     'mptt',
-    'djamin',
+     'djamin',
+    'django_summernote',
+    'material',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,7 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog',
-    'django_summernote',
+
 
 ]
 
@@ -83,10 +85,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'mysql',
-        'USER': 'root',
+        'USER': 'GoodLand',
         'PASSWORD': '19690401',
-        'HOST': 'localhost',
-        'PORT': '2333',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
     }
 }
 
@@ -148,7 +150,7 @@ SUMMERNOTE_CONFIG = {
     # 'lang': None,
 
     # Or, set editor language/locale forcely
-    'lang': 'zh-cn',
+    'lang': 'zh-CN',
 
     # # Customize toolbar buttons
     # 'toolbar': [
@@ -199,4 +201,74 @@ SUMMERNOTE_CONFIG = {
         },
     }
 }
+FILER_ENABLE_PERMISSIONS  = True
 THUMBNAIL_HIGH_RESOLUTION = True
+
+
+FILER_STORAGES = {
+    'public': {
+        'main': {
+            'ENGINE': 'filer.storage.PublicFileSystemStorage',
+            'OPTIONS': {
+                'location':'D:/CherryLand/blog/media/filer',
+                    #'/path/to/media/filer'
+                'base_url': '/media/filer/',
+            },
+            'UPLOAD_TO': 'filer.utils.generate_filename.randomized',
+            'UPLOAD_TO_PREFIX': 'filer_public',
+        },
+        'thumbnails': {
+            'ENGINE': 'filer.storage.PublicFileSystemStorage',
+            'OPTIONS': {
+                'location': 'D:/CherryLand/blog/media/filer_thumbnails',
+                'base_url': '/media/filer_thumbnails/',
+            },
+        },
+    },
+    'private': {
+        'main': {
+            'ENGINE': 'filer.storage.PrivateFileSystemStorage',
+            'OPTIONS': {
+                'location': 'D:/CherryLand/blog/smedia/filer',
+                'base_url': '/smedia/filer/',
+            },
+            'UPLOAD_TO': 'filer.utils.generate_filename.randomized',
+            'UPLOAD_TO_PREFIX': 'filer_public',
+        },
+        'thumbnails': {
+            'ENGINE': 'filer.storage.PrivateFileSystemStorage',
+            'OPTIONS': {
+                'location': 'D:/CherryLand/blog/smedia/filer_thumbnails',
+                'base_url': '/smedia/filer_thumbnails/',
+            },
+        },
+    },
+}
+DEFAULT_FILER_SERVERS = {
+    'private': {
+        'main': {
+            'ENGINE': 'filer.server.backends.default.DefaultServer',
+            'OPTIONS': {
+                'location': 'D:/CherryLand/smedia/filer',
+                'nginx_location': '/nginx_filer_private',
+            },
+        },
+
+        'thumbnails': {
+            'ENGINE': 'filer.server.backends.default.DefaultServer',
+            'OPTIONS': {
+                'location':'D:/CherryLand/smedia/filer_thumbnails',
+                'nginx_location': '/nginx_filer_private_thumbnails',
+            }
+        }
+    }
+}
+THUMBNAIL_PROCESSORS = (
+    'easy_thumbnails.processors.colorspace',
+    'easy_thumbnails.processors.autocrop',
+    #'easy_thumbnails.processors.scale_and_crop',
+    'filer.thumbnail_processors.scale_and_crop_with_subject_location',
+    'easy_thumbnails.processors.filters',
+)
+FILER_0_8_COMPATIBILITY_MODE=True
+FILER_CANONICAL_URL = '/media/filer_public/'
