@@ -11,7 +11,9 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-
+class f(models.Model):
+    logo = FilerImageField(null=True, blank=True,
+                           related_name="logo_company")
 # 标签
 class Tag(models.Model):
     name = models.CharField(max_length=100)
@@ -35,7 +37,7 @@ class Article(models.Model):
     # 这两个列分别表示文章的创建时间和最后一次修改时间，存储时间的字段用 DateTimeField 类型。
     created_time = models.DateTimeField(verbose_name='创建时间')
     modified_time = models.DateTimeField(verbose_name='最后修改时间')
-    Month.get_lookup(created_time.date().month + created_time.date().day)
+    # Month.get_lookup(created_time.date().month + created_time.date().day)
     # 文章摘要，可以没有文章摘要，但默认情况下 CharField 要求我们必须存入数据，否则就会报错。
     # 指定 CharField 的 blank=True 参数值后就可以允许空值了。
     excerpt = models.TextField(verbose_name='摘要')

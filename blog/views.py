@@ -1,5 +1,5 @@
 import random
-from .models import Article, Category as c, Tag as t, LikePhrase
+from .models import Article, Category as c, Tag as t, LikePhrase,f
 from django.shortcuts import render, get_object_or_404
 from django.db.models import F
 from django.core.paginator import Paginator
@@ -156,4 +156,5 @@ def about(request):
 
 
 def mygays(request):
-    return render(request, 'mygays.html', context={})
+    post_list = f.objects.all()
+    return render(request, 'mygays.html', context={"post_list",post_list})

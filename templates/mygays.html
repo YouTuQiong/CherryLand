@@ -5,6 +5,9 @@
     <title>Title</title>
 </head>
 <body>
-
+{%   for f in post_list %}
+{% load thumbnail %}
+{% thumbnail f.logo 250x250 crop %}
+{% endfor %}
 </body>
 </html>

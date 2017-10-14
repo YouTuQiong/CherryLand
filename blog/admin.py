@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Article, Category, Tag,LikePhrase
+from .models import Article, Category, Tag,LikePhrase,f
 from django_summernote.admin import SummernoteModelAdmin
 # admin.site.register(Article)
 
@@ -22,3 +22,4 @@ admin.site.register(Tag)
 admin.site.register(LikePhrase,PageModelAdmin)
 admin.site.register(Article,Article_and_PageModelAdmin)
 
+admin.site.register(f)
