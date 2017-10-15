@@ -10,6 +10,11 @@ function goTop() {
             $("#gotop").fadeOut(1000);//以1秒的间隔渐隐id=gotop的元素
     });
 };
+    function jump() {
+        var event = event || window.event;//这里的event兼容跟上面不同，关于event的兼容，请猛戳这里
+        if (event.keyCode === 13) {
+        }
+    }
 $(function () {
     //点击回到顶部的元素
     $("#gotop").click(function (e) {
@@ -141,23 +146,26 @@ $(function () {
     // });
     var search = $('#search')
     var s_text = $('#s_text')
+    var inputs = $('#inputs')
+    var event = event || window.event
+
     search.click(function () {
         s_text.css('display', 'initial')
         if (this.isShow === false) {
-            $('.lo').css('z-index','3')
-             $('#s_text').css('z-index','-3')
+            $('.lo').css('z-index', '3')
+            $('#s_text').css('z-index', '-3')
             this.isShow = true
             // $('#s_text').removeClass('tinUpIn')
             // $('#s_text').addClass('tinUpOut')
-            console.log('2223')
+            // console.log('2223')
         }
         else {
-            $('.lo').css('z-index','-1')
-            $('#s_text').css('z-index','3')
+            $('.lo').css('z-index', '-1')
+            $('#s_text').css('z-index', '3')
             this.isShow = false
             // $('#s_text').removeClass('tinUpOut')
             // $('#s_text').addClass('tinUpIn')
-            console.log('2222')
+            // console.log('2222')
         }
 
     })

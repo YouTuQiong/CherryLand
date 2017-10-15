@@ -5,7 +5,7 @@
     <title>{{ Article.title }} ———— CherryLand</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" href={% static 'favicon.ico' %} />
+    <link rel="shortcut icon" href={% static 'favicon.ico' %}/>
     <script src="{% static 'blog/js/fontawesome.js' %} "></script>
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <link href="https://cdn.bootcss.com/minireset.css/0.0.2/minireset.css" rel="stylesheet">
@@ -31,7 +31,6 @@
             </div>
         </header>
     </header>
-    </header>
     <div class="container">
         <div class="fuck">
             <div class="card">
@@ -53,15 +52,15 @@
             </div>
         </div>
 
-        <div class="content">
+        <div class="content detail">
             <article class="post post-{{ Article.pk }}">
                 <header class="entry-header">
-                    <h1 class="entry-title"><a>{{ Article.title }}</a></h1>
-                    <div class="post-content">{{ Article.retrunBody }}</div>
+                    <h1 class="entry-title detail-a" style="    text-align: center;"><a>{{ Article.title }}</a></h1>
+                    <div class="post-content ">{{ Article.retrunBody |safe}}</div>
                     <div class="entry-meta">
                     <span class="post-category"><i class="fa fa-bookmark"
                                                    aria-hidden="true"></i><a
-                                                                         href="{% url 'Category' Article.category.pk %}">{{ Article.category.name }} </a></span>
+                            href="{% url 'Category' Article.category.pk %}">{{ Article.category.name }} </a></span>
                         <span class="post-date"><i class="fa fa-clock-o" aria-hidden="true"></i><span><time
                                 class="entry-date"
                                 datetime="{{ Article.created_time }}">{{ Article.created_time }}</time></span></span>
@@ -72,16 +71,31 @@
                                                                              aria-hidden="true"></i> 222</span>
                         <span class="views-count"> <i class="fa fa-eye"
                                                       aria-hidden="true"></i> {{ Article.views }}</span>
+                        <div class="jumppage">
+                            {% if back != -1 %}
+                                      <i class="fa  fa-chevron-left">
+                                    <a style="margin-left: 10px"
+                                       href="{{ back.get_absolute_url }}"> {{ back.title }}</a></i>
+                                {% elif back == -1 %}
+                                      <i class="fa  fa-chevron-left"></i>
+                                    <p>这已经是第一篇了</p>
+                                {% endif %}
+                            {% if next != -1 %}
+                                <div style="float: right"><a style="margin-right: 10px"
+                                                             href="{{ next.get_absolute_url }}"> {{ next.title }}</a><i
+                                        class="fa  fa-chevron-right"></i></div>
+                            {% elif next == -1 %}
+                                <p style="float: right">这已经是最后一篇了 <i class="fa  fa-chevron-right"></i></p>
+                            {% endif %}
+                        </div>
                     </div>
                 </header>
-
             </article>
 
         </div>
     </div>
 </div>
 <div style="clear:both;"></div>
-
 <div id="foot" class="fw">
     <div id="bottom" class="fw">
         <div id="footer" class="wc center clf">

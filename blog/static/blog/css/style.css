@@ -39,7 +39,6 @@ body {
 }
 
 .container {
-
     width: 1100px;
     margin: auto;
 }
@@ -236,7 +235,7 @@ a {
 h1.entry-title {
     /*border-bottom: 1px outset #6d667e;*/
     font-size: 18px;
-    padding: 10px 0px 20px;
+    padding: 10px 0px 10px;
     letter-spacing: 1.5px
 }
 
@@ -501,4 +500,17 @@ li.search {
 
 .none {
     display: none;
+}
+.detail{
+    padding-top: 30px;
+    ;
+}
+.detail-a{
+    font-weight: bold;
+}
+.detail-a a {
+    font-size: 30px;
+}
+.detail-a a:hover{
+    cursor:Default
 }

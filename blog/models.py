@@ -35,7 +35,7 @@ class Article(models.Model):
     body = models.TextField(verbose_name='正文')
 
     # 这两个列分别表示文章的创建时间和最后一次修改时间，存储时间的字段用 DateTimeField 类型。
-    created_time = models.DateTimeField(verbose_name='创建时间')
+    created_time = models.DateTimeField(auto_now_add=True,verbose_name='创建时间')
     modified_time = models.DateTimeField(verbose_name='最后修改时间')
     # Month.get_lookup(created_time.date().month + created_time.date().day)
     # 文章摘要，可以没有文章摘要，但默认情况下 CharField 要求我们必须存入数据，否则就会报错。
@@ -62,7 +62,7 @@ class Article(models.Model):
     def __str__(self):
         return self.title
     def retrunBody(self):
-        return  format_html(self.body) #使用html转义而不是在模板中使用safe，防止xss攻击
+        return  (self.body) #使用html转义而不是在模板中使用safe，防止xss攻击
 
 # 喜欢的橘子
 class LikePhrase(models.Model):

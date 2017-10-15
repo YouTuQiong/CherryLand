@@ -1,4 +1,8 @@
 import random
+
+from django.db.models import Model
+from django.db.models.functions import Coalesce
+
 from .models import Article, Category as c, Tag as t, LikePhrase,f
 from django.shortcuts import render, get_object_or_404
 from django.db.models import F
@@ -36,21 +40,24 @@ def detail(request, pk):
     article.views = F('views') + 1
     article.save()
     article = get_object_or_404(Article, pk=pk)
-    s = article.tags.all()
+    created_time = article.created_time
+    jumpPage = findJumpPage(Article, created_time)
     return render(request, 'detail.html', context={'Article': article,
-                                                   'phrase': getphrase()
+                                                   'phrase': getphrase(),
+                                                   'back':jumpPage[0],
+                                                   'next':jumpPage[1],
                                                    })
 
 
 def archives(request):
     post_list = Article.objects.all().order_by('-created_time')
     datalist = Article.objects.datetimes('created_time', 'year', 'DESC')
-    datalist = reversed(datalist)
+    # datalist = reversed(datalist)
     count = len(post_list)
     dataContentlist = []
     for i in datalist:
         dataContentlist.append(i.year)
-        dataContentlist.append(Article.objects.filter(created_time__year=str(i.year)))
+        dataContentlist.append(reversed(Article.objects.filter(created_time__year=str(i.year))))
     paginator = Paginator(dataContentlist, 6)
     page = request.GET.get('page')
     try:
@@ -158,3 +165,27 @@ def about(request):
 def mygays(request):
     post_list = f.objects.all()
     return render(request, 'mygays.html', context={"post_list",post_list})
+
+def randomHtml(request):
+    post_list = Article.objects.all()
+    count = len(post_list)
+    if(count>0):
+        nowPage = int(random.randint(0, count))
+    else:
+        pass
+    post = post_list[nowPage-1]
+    post_created_time = post.created_time
+    jumpPage = findJumpPage(Article,post_created_time)
+
+    return render(request, 'detail.html', context={"Article": post,'phrase':getphrase() ,'jumpPage':jumpPage})
+def findJumpPage(Models,created_time):
+    jumpPage = [-1,-1]
+    next = Models.objects.filter(created_time__lt=created_time).order_by(Coalesce('created_time','id').desc())
+    back = Models.objects.filter(created_time__gt=created_time)
+    # back =  Models.objects.filter(created_time=created_time).filter(created_time__gt=created_time).order_by('created_time')
+    if(len(next) != 0):
+        # next = reversed(next)
+        jumpPage[1] = next[0]
+    if(len(back) !=0):
+        jumpPage[0] = back[0]
+    return jumpPage

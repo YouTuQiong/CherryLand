@@ -34,4 +34,5 @@ urlpatterns = [
     url(r'^reader.html', views.reader, name='reader'),
     url(r'^mygays', views.mygays, name='mygays'),
     url(r'^mygays.html', views.mygays, name='mygays'),
+    url(r'^random.html', views.randomHtml, name='randomHtml'),
 ]
