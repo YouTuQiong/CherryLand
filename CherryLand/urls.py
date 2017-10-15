@@ -23,7 +23,7 @@ urlpatterns = [
     url(r'^$', views.index),
     url(r'^index.html', views.index),
     url(r'^summernote/', include('django_summernote.urls')),
-    url(r'^Article/(?P<pk>[0-9]+)/$', views.detail, name='detail'),
+    url(r'^Article/(?P<pk>[0-9]+).html$', views.detail, name='detail'),
     url(r'^Archives/', views.archives, name='archives'),
     url(r'^Archive.html', views.archives, name='archives'),
     url(r'^Category/(?P<pk>[0-9]+)/$', views.Category, name='Category'),

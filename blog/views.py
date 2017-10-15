@@ -163,8 +163,7 @@ def about(request):
 
 
 def mygays(request):
-    post_list = f.objects.all()
-    return render(request, 'mygays.html', context={"post_list",post_list})
+    return render(request, 'mygays.html', context={})
 
 def randomHtml(request):
     post_list = Article.objects.all()
