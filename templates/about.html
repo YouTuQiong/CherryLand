@@ -1,88 +1,42 @@
-{% load staticfiles %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="{% static 'blog/js/fontawesome.js' %} "></script>
-        <script src="{% static 'blog/js/jquery.min.js' %} "></script>
-    <link rel="stylesheet" href="{% static 'blog/css/reset.css' %}">
-    <link rel='stylesheet' type="text/css" href="{% static 'blog/css/bootstrap.css' %}">
-    <link rel='stylesheet' type="text/css" href="{% static 'blog/css/style.css' %}">
-        <link rel='stylesheet' type="text/css" href="{% static 'blog/css/clock.css' %}">
-</head>
-<body>
-<div class="wrap">
-    <header class="header">
-        <header class="header-item header-srp">
-            <div class=""><a class="header__logo" href="{{ 'index.html' }}">
+{% extends "base.html" %}
 
-            </a></div>
-            <li class="header__nav-item_status_active"><a href="{% url 'Category' 1 %}">技术</a></li>
-            <li><a href="{% url 'archives' %}">归档</a></li>
-            {#            <li>还没做</li>#}
-            <div class="header__item__right">
-                {#           pip install fabric#}
-                <li class="search d6 magictime" id="s_text" >
-                    <input type="text" onkeydown = "jump()"id="inputs"placeholder="搜索从这里开始...">
-                </li>
-                <li class="lo"><a href="https://github.com/youTuQiong" target="_blank" title="GitHub" class="fa fa-github "></a>
-                </li>
-                <li class="lo"><a href="#" target="_blank" title="gentlemen.zhang@gmail.com" class="fa fa-envelope"></a>
-                </li>
-                <li><a class="fa fa-search" id="search"></a></li>
-            </div>
-        </header>
-    </header>
-    <div class="container">
-        <div class="fuck">
-            <div class="card">
-                <div class="center-icon">
-                    <img src="{% static 'blog/img/user.jpg' %}">
-                </div>
-                <div class="blogname">Good Land</div>
-            </div>
-            <div class="othermenu">
-                <ul>
-                    <li><a href="reader.html">我的文章</a></li>
-                    <li><a href="mygays.html">牛逼哄哄的朋友</a></li>
-                    <li><a href="about.html">关于我</a></li>
-                    <li></li>
-                </ul>
-            </div>
-            <div id="textfloat" class="magictime">
-                <div class="textwidget">
-                    <p>{{ phrase|safe }}</p>
-                </div>
-                <div id="clock" class="light textwidget ">
-                    <div class="display">
-                        <div class="weekdays"></div>
-                        <div class="digits" style="margin-top: 20px;"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-</div>
-</div>
-<div style="clear:both;"></div>
-
-<div id="foot" class="fw">
-    <div id="bottom" class="fw">
-        <div id="footer" class="wc center clf">
-            <div class="info">
-                <p>Copyleft 2017 <a href="#">Cherry Land</a>. Proudly published with <a
-                        href="https://https://www.djangoproject.com/" target="_blank">Django</a>. Made with ❤ by
-                    TuQiong.</p>
-            </div>
-        </div>
-    </div>
-
-</div>
-<div class="go-top" id="gotop">
-      <span class="fa fa-angle-up"></span>
-    </div>
-</body>
-<script src="{% static 'blog/js/snap.js' %} "></script>
-<script type="text/javascript" src="{% static 'blog/js/indexeffct.js' %}"></script>
-</html>
+{% block phrase %}{{ phrase|safe  }}{% endblock %}
+{#<div class="content" style="    min-height: 1000px;">#}
+{% block content %}
+            <h1 class="entry-title">
+                关于我？ 我是一个菜鸡。
+            </h1>
+            <span>
+                <a href="https://docs.python.org/3.4/">Python 3.4文档</a>
+            </span>
+            <span>
+                <a href="http://www.pythondoc.com/pythontutorial3/">Python 3.6中文文档</a>
+            </span>
+            <span>
+                <a href="http://python.usyiyi.cn/documents/django_182/index.html">Django 1.8.2 文档</a>
+            </span>
+{#            <span>#}
+{#                <a href="https://docs.python.org/3.4/">Python 3.4文档</a>#}
+{#            </span>#}
+{#            <span>#}
+{#                <a href="https://docs.python.org/3.4/">Python 3.4文档</a>#}
+{#            </span>#}
+{#            <span>#}
+{#                <a href="https://docs.python.org/3.4/">Python 3.4文档</a>#}
+{#            </span>#}
+{#            <span>#}
+{#                <a href="https://docs.python.org/3.4/">Python 3.4文档</a>#}
+{#            </span>#}
+{#            <span>#}
+{#                <a href="https://docs.python.org/3.4/">Python 3.4文档</a>#}
+{#            </span>#}
+{#            <span>#}
+{#                <a href="https://docs.python.org/3.4/">Python 3.4文档</a>#}
+{#            </span>#}
+{#            <span>#}
+{#                <a href="https://docs.python.org/3.4/">Python 3.4文档</a>#}
+{#            </span>#}
+{#            <span>#}
+{#                <a href="https://docs.python.org/3.4/">Python 3.4文档</a>#}
+{#            </span>#}
+{% endblock %}
