@@ -2,37 +2,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>{% block title %}{% endblock %}</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="{% static 'blog/js/fontawesome.js' %} "></script>
+    <link rel='stylesheet' type="text/css" href="{% static 'blog/css/font-awesome.min.css' %} ">
+    <link rel='stylesheet' type="text/css" href="{% static 'blog/css/magic.min.css' %} ">
     <script src="{% static 'blog/js/jquery.min.js' %} "></script>
+    <script src="{% static 'blog/js/snap.js' %} "></script>
     <link rel="stylesheet" href="{% static 'blog/css/reset.css' %}">
     <link rel='stylesheet' type="text/css" href="{% static 'blog/css/bootstrap.css' %}">
     <link rel='stylesheet' type="text/css" href="{% static 'blog/css/style.css' %}">
     <link rel='stylesheet' type="text/css" href="{% static 'blog/css/clock.css' %}">
-    <style>
-        .content span {
-                display: inherit;
-        }
-    </style>
 </head>
 <body>
 <div class="wrap">
     <header class="header">
         <header class="header-item header-srp">
-            <div class=""><a class="header__logo" href="{{ 'index.html' }}">
-
+            <div class=""><a class="header__logo" href="../../index.html">
             </a></div>
-            <li class="header__nav-item_status_active"><a href="{% url 'Category' 1 %}">技术</a></li>
+            <li class="header__nav-item_status_active"><a href="../../Category/1">技术</a></li>
             <li><a href="{% url 'archives' %}">归档</a></li>
             {#            <li>还没做</li>#}
             <div class="header__item__right">
                 {#           pip install fabric#}
-                <li class="search d6 magictime" id="s_text">
-                    <input type="text" onkeydown="jump()" id="inputs" placeholder="搜索从这里开始...">
+                <li class="search d6 magictime" id="s_text" >
+                    <input type="text" onkeydown = "jump()"id="inputs"placeholder="搜索从这里开始...">
                 </li>
-                <li class="lo"><a href="https://github.com/youTuQiong" target="_blank" title="GitHub"
-                                  class="fa fa-github "></a>
+                <li class="lo"><a href="https://github.com/youTuQiong" target="_blank" title="GitHub" class="fa fa-github "></a>
                 </li>
                 <li class="lo"><a href="#" target="_blank" title="gentlemen.zhang@gmail.com" class="fa fa-envelope"></a>
                 </li>
@@ -50,15 +46,15 @@
             </div>
             <div class="othermenu">
                 <ul>
-                    <li><a href="reader.html">我的文章</a></li>
-                    <li><a href="mygays.html">牛逼哄哄的朋友</a></li>
-                    <li><a href="about.html">关于我</a></li>
+                    <li><a href=/../../reader.html">我的文章</a></li>
+                    <li><a href="../../mygays.html">牛逼哄哄的朋友</a></li>
+                    <li><a href="../../about.html">关于我</a></li>
                     <li></li>
                 </ul>
             </div>
             <div id="textfloat" class="magictime">
                 <div class="textwidget">
-                    <p>{% block phrase%}{% endblock %}</p>
+                    <p>{{ phrase|safe }}</p>
                 </div>
                 <div id="clock" class="light textwidget ">
                     <div class="display">
@@ -68,13 +64,18 @@
                 </div>
             </div>
         </div>
-      <div class="content">
-        {% block content %}{% endblock %}
-    </div>
+    {% block content %}
+{#        内容页的html代码#}
+    {% endblock %}
+    {% block content-father %}
+{#        首页的html代码#}
+    {% endblock %}
+
     </div>
 </div>
-<div style="clear:both;"></div>
-
+    {% block page %}
+{#        分页功能的html代码#}
+    {% endblock %}
 <div id="foot" class="fw">
     <div id="bottom" class="fw">
         <div id="footer" class="wc center clf">
@@ -91,6 +92,5 @@
     <span class="fa fa-angle-up"></span>
 </div>
 </body>
-<script src="{% static 'blog/js/snap.js' %} "></script>
 <script type="text/javascript" src="{% static 'blog/js/indexeffct.js' %}"></script>
 </html>
