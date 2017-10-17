@@ -1,45 +1,72 @@
 {% extends "base.html" %}
-    {% block title %}{{ Article.title }} - GoodLand's Blog{% endblock %}
+{% block title %}{{ Article.title }} - GoodLand's Blog{% endblock %}
 {% block content %}
-        <div class="content">
-            <article class="post post-{{ Article.pk }}">
-                <header class="entry-header">
-                    <h1 class="entry-title detail-a" style="    text-align: center;"><a>{{ Article.title }}</a></h1>
-                    <div class="post-content ">{{ Article.retrunBody |safe}}</div>
-                    <div class="entry-meta">
-                    <span class="post-category"><i class="fa fa-bookmark"
-                                                   aria-hidden="true"></i><a
-                            href="{% url 'Category' Article.category.pk %}">{{ Article.category.name }} </a></span>
-                        <span class="post-date"><i class="fa fa-clock-o" aria-hidden="true"></i><span><time
-                                class="entry-date"
-                                datetime="{{ Article.created_time }}">{{ Article.created_time }}</time></span></span>
-                        <span class="post-tag"><i class="fa fa-tags"
-                                                  aria-hidden="true"></i>{% for tag in Article.tags.all %}
-                            <a href="{% url 'Tag' tag.pk %}">{{ tag }}   {% endfor %}</a></span>
-                        <span class="comments-link" style="display: none"><i class="fa fa-comment"
-                                                                             aria-hidden="true"></i> 222</span>
-                        <span class="views-count"> <i class="fa fa-eye"
-                                                      aria-hidden="true"></i> {{ Article.views }}</span>
-                        <div class="jumppage" style="margin-top: 20px;">
-                            {% if back != -1 %}
-                                      <i class="fa  fa-chevron-left">
-                                    <a style="margin-left: 10px"
-                                       href="{{ back.get_absolute_url }}"> {{ back.title }}</a></i>
-                                {% elif back == -1 %}
-                                      <i class="fa  fa-chevron-left"></i>
-                                    <span>这已经是第一篇了</span>
-                                {% endif %}
-                            {% if next != -1 %}
-                                <div style="float: right"><a style="margin-right: 10px"
-                                                             href="{{ next.get_absolute_url }}"> {{ next.title }}</a><i
-                                        class="fa  fa-chevron-right"></i></div>
-                            {% elif next == -1 %}
-                                <p style="float: right">这已经是最后一篇了 <i class="fa  fa-chevron-right"></i></p>
-                            {% endif %}
-                        </div>
-                    </div>
-                </header>
-            </article>
+    <div class="content">
 
-        </div>
+        <article class="post post-{{ Article.pk }}">
+
+            <header class="entry-header">
+
+                <h1 class="entry-title detail-a" style="    text-align: center;"><a>{{ Article.title }}</a></h1>
+
+                <div class="post-content ">{{ Article.retrunBody |safe }}
+                </div>
+
+                <div class="entry-meta">
+                    <span class="post-category">
+                        <i class="fa fa-bookmark" aria-hidden="true"></i>
+                        <a href="{% url 'Category' Article.category.pk %}">
+                            {{ Article.category.name }}
+                        </a>
+                    </span>
+
+                    <span class="post-date">
+                        <i class="fa fa-clock-o" aria-hidden="true"></i>
+                        <span>
+                            <time class="entry-date" datetime="{{ Article.created_time }}">
+                                {{ Article.created_time }}
+                            </time>
+                        </span>
+                    </span>
+
+                    <span class="post-tag">
+                        <i class="fa fa-tags" aria-hidden="true"></i>
+                        {% for tag in Article.tags.all %}
+                            <a href="{% url 'Tag' tag.pk %}">{{ tag }}</a>
+                        {% endfor %}
+                    </span>
+
+                    <span class="views-count">
+                        <i class="fa fa-eye" aria-hidden="true"></i> {{ Article.views }}
+                    </span>
+
+                    <div class="jumppage" style="margin-top: 20px;">
+                        {% if back != -1 %}
+                            <i class="fa  fa-chevron-left">
+                                <a style="margin-left: 10px" href="{{ back.get_absolute_url }}"> {{ back.title }}</a>
+                            </i>
+                        {% elif back == -1 %}
+                            <i class="fa  fa-chevron-left"></i>
+                            <span>这已经是第一篇了</span>
+                        {% endif %}
+                        {% if next != -1 %}
+                            <div style="float: right">
+                                <a style="margin-right: 10px" href="{{ next.get_absolute_url }}">{{ next.title }}</a>
+                                <i class="fa  fa-chevron-right"></i>
+                            </div>
+                        {% elif next == -1 %}
+                            <p style="float: right">
+                                这已经是最后一篇了
+                                <i class="fa  fa-chevron-right"></i>
+                            </p>
+                        {% endif %}
+                    </div>
+
+                </div>
+
+            </header>
+
+        </article>
+
+    </div>
 {% endblock %}

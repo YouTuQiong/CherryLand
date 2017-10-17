@@ -1,76 +1,85 @@
 {% extends "base.html" %}
 {% block title %} 归档 - GoodLand's blog{% endblock %}
-   {% block  content %}
-        <div class="content" style="    min-height: 624px;">
-            <h1 class="archive-title">归档
-                <small>（目前共计 {{ count }} 篇文章）</small>
-            </h1>
-            <div class="archive-content">
-                {% for list in dataContentlist %}
-                    {% if list > 0 %}
-                        <a class="list-group-item active"
-                           style="font-size: 20px;     background-color: #9edaf5; border-color: #007ac1;">{{ list }}</a>
-                    {% else %}
-                        {% for Article in list %}
-                            <a class="archive-item list-group-item"
-                               href="{{ Article.get_absolute_url }}"><span class="bagde">●  {{ Article.title }}   <p style="float: right">{{ Article.created_time |date:"Y-n-d " }}</p></span>
-                            </a>
+{% block  content %}
+    <div class="content" style="    min-height: 624px;">
 
-                        {% endfor %}
-                    {% endif %}
-                {% endfor %}
-            </div>
+        <h1 class="archive-title">归档
+            <small>（目前共计 {{ count }} 篇文章）</small>
+        </h1>
+
+        <div class="archive-content">
+            {% for list in dataContentlist %}
+                {% if list > 0 %}
+                    <a class="list-group-item active"
+                       style="font-size: 20px;background-color: #9edaf5; border-color: #007ac1;">
+                        {{ list }}
+                    </a>
+                {% else %}
+                    {% for Article in list %}
+                        <a class="archive-item list-group-item"
+                           href="{{ Article.get_absolute_url }}">
+                                ●  {{ Article.title }}
+                                    <time style="float: right" datetime="{{ Article.created_time|date:'Y-n-d' }}">
+                                        {{ Article.created_time |date:"Y-n-d " }}
+                                    </time>
+
+                        </a>
+                    {% endfor %}
+                {% endif %}
+            {% endfor %}
         </div>
- {% endblock %}
+    </div>
+{% endblock %}
 {% block page %}
-<div class="page">
-    <ul class="pagination">
-        <!-- 第一页 -->
-        {% if dataContentlist.number == 1 %}
-            <li>
-                <a class=" fa fa-angle-double-left "></a>
-            </li>
-        {% else %}
-            <li>
-                <a class=" fa fa-angle-double-left " href="?{{ query_params.urlencode }}&page=1"></a>
-            </li>
-        {% endif %}
-        <!-- 上一页 -->
-        {% if dataContentlist.has_previous %}
-            <li>
-                <a class=" fa fa-angle-left "
-                   href="?{{ query_params.urlencode }}&page={{ dataContentlist.previous_page_number }}"></a>
-            </li>
-        {% else %}
-            <li>
-                <a class=" fa fa-angle-left "></a>
-            </li>
-        {% endif %}
+    <div class="page">
+        <ul class="pagination">
+            <!-- 第一页 -->
+            {% if dataContentlist.number == 1 %}
+                <li>
+                    <a class=" fa fa-angle-double-left "></a>
+                </li>
+            {% else %}
+                <li>
+                    <a class=" fa fa-angle-double-left " href="?{{ query_params.urlencode }}&page=1"></a>
+                </li>
+            {% endif %}
+            <!-- 上一页 -->
+            {% if dataContentlist.has_previous %}
+                <li>
+                    <a class=" fa fa-angle-left "
+                       href="?{{ query_params.urlencode }}&page={{ dataContentlist.previous_page_number }}"></a>
+                </li>
+            {% else %}
+                <li>
+                    <a class=" fa fa-angle-left "></a>
+                </li>
+            {% endif %}
 
-        <!-- 当前页/总页数 -->
-        <li class="nowPage">
-            <a> {{ dataContentlist.number }} of {{ dataContentlist.paginator.num_pages }}</a>
-        </li>
-
-        <!-- 下一页 -->
-        {% if post_list.has_next %}
-            <li><a class=" fa fa-angle-right "
-                   href="?{{ query_params.urlencode }}&page={{ dataContentlist.next_page_number }}">
-            </a></li>
-        {% else %}
-            <li>
-                <a class=" fa fa-angle-right "></a>
+            <!-- 当前页/总页数 -->
+            <li class="nowPage">
+                <a> {{ dataContentlist.number }} of {{ dataContentlist.paginator.num_pages }}</a>
             </li>
-        {% endif %}
 
-        <!-- 最后一页 -->
-        <li><a class="fa fa-angle-double-right pa"
-               href="?{{ query_params.urlencode }}&page={{ dataContentlist.paginator.num_pages }}">
-        </a>
-        </li>
-        <li><input type="text" id="pagenum"
-                   style="    width: 34px;height: 34px; border-color: #0a68a3;    float: left;"> <a>go</a></li>
-        <li></li>
-    </ul>
-</div>
+            <!-- 下一页 -->
+            {% if post_list.has_next %}
+                <li><a class=" fa fa-angle-right "
+                       href="?{{ query_params.urlencode }}&page={{ dataContentlist.next_page_number }}">
+                </a></li>
+            {% else %}
+                <li>
+                    <a class=" fa fa-angle-right "></a>
+                </li>
+            {% endif %}
+
+            <!-- 最后一页 -->
+            <li><a class="fa fa-angle-double-right pa"
+                   href="?{{ query_params.urlencode }}&page={{ dataContentlist.paginator.num_pages }}">
+            </a>
+            </li>
+            <li>
+                <input type="text" id="pagenum" style="    width: 34px;height: 34px; border-color: #0a68a3;    float: left;">
+                <a>go</a>
+            </li>
+        </ul>
+    </div>
 {% endblock page %}

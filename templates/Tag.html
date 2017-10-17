@@ -8,7 +8,9 @@
         <div class="archive-content">
             {% for Article in post_list %}
                 <a class="archive-item list-group-item"
-                   href="{{ Article.get_absolute_url }}"><span class="bagde">●   </span>{{ Article.title }} </a>
+                   href="{{ Article.get_absolute_url }}">
+                    <span class="bagde">●   </span>{{ Article.title }}
+                </a>
             {% endfor %}
         </div>
     </div>

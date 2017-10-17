@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-    {% block title %}一个菜鸡的成长之路 - GoodLand's Blog{% endblock %}
+{% block title %}一个菜鸡的成长之路 - GoodLand's Blog{% endblock %}
 {% block content-father %}
     <div class="content-father">
 
@@ -7,20 +7,25 @@
             <h1 class="entry-title reader">
                 <a>最受欢迎的文章</a>
             </h1>
-         <div style="padding: 20px">
-            {% for Article in post_list %}
 
-                <article class="post post-{{ Article.pk }}">
-                    <a class="archive-item list-group-item" style="    font-size: 12px;"
-                       href="{{ Article.get_absolute_url }}"><span class="bagde"></span>{{ Article.title }}
-                        <span class="views-count" style="float: right"> {{ Article.views }}  views</span>
-                    </a>
-                </article>
-            {% empty %}
-                <div class="no-post">暂时还没有发布的文章！</div>
-            {% endfor %}
+            <div style="padding: 20px">
+                {% for Article in post_list %}
+                    <article class="post post-{{ Article.pk }}">
+                        <a class="archive-item list-group-item" style="font-size: 12px;"
+                           href="{{ Article.get_absolute_url }}">
+                            <span class="bagde"></span>
+                            {{ Article.title }}
+                            <span class="views-count" style="float: right">
+                            {{ Article.views }}  views
+                        </span>
+                        </a>
+                    </article>
+                {% empty %}
+                    <div class="no-post">暂时还没有发布的文章！</div>
+                {% endfor %}
             </div>
-            <div></div>
+
         </div>
+
     </div>
 {% endblock %}

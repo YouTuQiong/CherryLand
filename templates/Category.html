@@ -1,18 +1,24 @@
 {% extends "base.html" %}
-    {% block title %} {{ name }}  - GoodLand's blog{% endblock %}
-    {% block content %}
-        <div class="content" style="    min-height: 624px;">
-            <h1 class="archive-title" >{{ name }}
-                <small>（目前共计 {{ count }} 篇文章）</small>
-            </h1>
-            <div class="archive-content">
-                {% for Article in post_list %}
-                    <a class="archive-item list-group-item"
-                       href="{{ Article.get_absolute_url }}"><span class="bagde">●   {{ Article.title }}<p style="float: right">{{ Article.created_time |date:"Y-n-d " }}</p></span> </a>
-                {% endfor %}
-            </div>
+{% block title %} {{ name }}  - GoodLand's blog{% endblock %}
+{% block content %}
+    <div class="content" style="min-height: 624px;">
+
+        <h1 class="archive-title">
+            {{ name }}
+            <small>（目前共计 {{ count }} 篇文章）</small>
+        </h1>
+
+        <div class="archive-content">
+            {% for Article in post_list %}
+                <a class="archive-item list-group-item" href="{{ Article.get_absolute_url }}">
+                    ● {{ Article.title }}
+                    <span style="float: right">{{ Article.created_time |date:"Y-n-d " }}</span>
+                </a>
+            {% endfor %}
         </div>
-    {% endblock %}
+
+    </div>
+{% endblock %}
 
 {% block page %}
     <div class="page">
@@ -60,9 +66,10 @@
                    href="?{{ query_params.urlencode }}&page={{ post_list.paginator.num_pages }}">
             </a>
             </li>
-            <li><input type="text" id="pagenum"
-                       style="    width: 34px;height: 34px; border-color: #0a68a3;    float: left;"> <a>go</a></li>
-            <li></li>
+            <li><input type="text" id="pagenum" style="width: 34px;height: 34px; border-color: #0a68a3;float: left;">
+                <a>go</a>
+            </li>
+
         </ul>
     </div>
 {% endblock %}
