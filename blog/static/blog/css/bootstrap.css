@@ -12,10 +12,7 @@ html {
 body {
 }
 
-article, aside, details, figcaption, figure, footer,
-
-,
-hgroup, main, menu, nav, section, summary {
+article, aside, details, figcaption, figure, footer, main, menu, nav, section, summary {
     display: block
 }
 
