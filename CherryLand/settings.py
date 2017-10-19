@@ -32,9 +32,10 @@ INSTALLED_APPS = [
     'easy_thumbnails',
     'filer',
     'mptt',
-     'djamin',
+    # 'djamin',
     'django_summernote',
-    'material',
+    'flat_responsive',
+    'flat',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -42,7 +43,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog',
-
 
 ]
 
@@ -201,17 +201,16 @@ SUMMERNOTE_CONFIG = {
         },
     }
 }
-FILER_ENABLE_PERMISSIONS  = True
+FILER_ENABLE_PERMISSIONS = True
 THUMBNAIL_HIGH_RESOLUTION = True
-
 
 FILER_STORAGES = {
     'public': {
         'main': {
             'ENGINE': 'filer.storage.PublicFileSystemStorage',
             'OPTIONS': {
-                'location':'D:/CherryLand/blog/media/filer',
-                    #'/path/to/media/filer'
+                'location': 'D:/CherryLand/blog/media/filer',
+                # '/path/to/media/filer'
                 'base_url': '/media/filer/',
             },
             'UPLOAD_TO': 'filer.utils.generate_filename.randomized',
@@ -257,7 +256,7 @@ DEFAULT_FILER_SERVERS = {
         'thumbnails': {
             'ENGINE': 'filer.server.backends.default.DefaultServer',
             'OPTIONS': {
-                'location':'D:/CherryLand/smedia/filer_thumbnails',
+                'location': 'D:/CherryLand/smedia/filer_thumbnails',
                 'nginx_location': '/nginx_filer_private_thumbnails',
             }
         }
@@ -266,9 +265,9 @@ DEFAULT_FILER_SERVERS = {
 THUMBNAIL_PROCESSORS = (
     'easy_thumbnails.processors.colorspace',
     'easy_thumbnails.processors.autocrop',
-    #'easy_thumbnails.processors.scale_and_crop',
+    # 'easy_thumbnails.processors.scale_and_crop',
     'filer.thumbnail_processors.scale_and_crop_with_subject_location',
     'easy_thumbnails.processors.filters',
 )
-FILER_0_8_COMPATIBILITY_MODE=True
+FILER_0_8_COMPATIBILITY_MODE = True
 FILER_CANONICAL_URL = '/media/filer_public/'

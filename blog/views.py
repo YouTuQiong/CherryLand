@@ -2,7 +2,8 @@ import random
 
 from django.db.models import Model
 from django.db.models.functions import Coalesce
-
+from django.http import HttpRequest
+from django.utils.html import format_html
 from .models import Article, Category as c, Tag as t, LikePhrase, f
 from django.shortcuts import render, get_object_or_404
 from django.db.models import F
@@ -98,6 +99,7 @@ def Category(request, pk):
     query_params.pop('page', None)  # delete page param
     count = len(post_list)
     name = post_list[0].category.name
+    s = HttpRequest
     return render(request, 'Category.html', context={'post_list': post_list,
                                                      'count': count, 'name': name,
                                                      'phrase': getphrase(),
@@ -155,7 +157,7 @@ def getphrase():
         s = phrase[nownum - 1].phrase
     else:
         s = ''
-    return s
+    return format_html(s)
 
 
 def about(request):

@@ -85,9 +85,9 @@ class LikePhrase(models.Model):
     def __str__(self):
         return self.phrase
 
-    def retrunHTML(self):
-        return format_html(self.phrase)  # 使用html转义而不是在模板中使用safe，防止xss攻击
-
+    # def retrunHTML(self):
+    #     return format_html(self.phrase)  # 使用html转义而不是在模板中使用safe，防止xss攻击
+    #
 
 from django.db import models
 
