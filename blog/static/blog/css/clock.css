@@ -50,7 +50,8 @@ section, footer, header, aside{
 
 #clock.light .digits div.dots:before,
 #clock.light .digits div.dots:after{
-	background-color:#bae8fc;
+	/*background-color:#bae8fc; 修改颜色*/
+	 background-color:#E6E6E6;
 }
 
 
@@ -74,9 +75,6 @@ section, footer, header, aside{
 	border-color:#cacaca;
 }
 
-#clock.dark .alarm{
-	background:url('../img/alarm_dark.jpg');
-}
 
 #clock.dark .display{
 	background-color:#0f1620;
@@ -423,8 +421,10 @@ footer #tzine-actions iframe{
 	margin-top: 11px;
 }
 #clock.light .digits div span {
-    background-color: #bae8fc;
-    border-color: #bae8fc;
+    /*background-color: #bae8fc;*/
+    /*border-color: #bae8fc;*/
+     background-color: #cbcbcb;
+    border-color: #cbcbcb;
 }
 div.dots:after {
     background-color: #bae8fc;

@@ -1,6 +1,40 @@
 /**
  * Created by jordan on 10/5/2017.
  */
+var banner = $('#banner')
+// banner.on('click',function () {
+//     console.log("2222")
+// })
+var all = $('.all-cover')
+FastClick.attach(document.body);
+var half = $('.half-cover')
+banner.on("click", function () {
+    all.fadeIn()
+    half.fadeIn()
+    banner.addClass('bannerReg')
+    half.addClass('slideLeftReturn')
+    console.log('++++++')
+});
+all.on('click', cover);
+
+function cover() {
+    $('.half-cover').fadeOut()
+    $('.all-cover').fadeOut()
+    half.removeClass('slideLeftReturn')
+    half.addClass('slideLeft')
+    banner.removeClass('bannerReg')
+    console.log('---')
+
+}
+$(".swiperight").on("swiperight", function () {
+    if (!half.hasClass('slideLeftReturn')) {
+        all.fadeIn()
+        half.fadeIn()
+        banner.addClass('bannerReg')
+        half.addClass('slideLeftReturn')
+    }
+});
+
 function goTop() {
     $(window).scroll(function (e) {
         //若滚动条离顶部大于100元素
@@ -10,11 +44,11 @@ function goTop() {
             $("#gotop").fadeOut(1000);//以1秒的间隔渐隐id=gotop的元素
     });
 };
-    function jump() {
-        var event = event || window.event;//这里的event兼容跟上面不同，关于event的兼容，请猛戳这里
-        if (event.keyCode === 13) {
-        }
+function jump() {
+    var event = event || window.event;//这里的event兼容跟上面不同，关于event的兼容，请猛戳这里
+    if (event.keyCode === 13) {
     }
+}
 $(function () {
     //点击回到顶部的元素
     $("#gotop").click(function (e) {
@@ -27,7 +61,21 @@ $(function () {
     goTop();//实现回到顶部元素的渐显与渐隐
 });
 $(function () {
+    function bannerOut() {
+        var banner = $('#banner')
+        var half = $('#half-cover')
+        banner.click(function () {
+            if (!banner.hasClass('bannerReg')) {
+                half.addClass('slideLeftReturn')
+            }
+            else
+                banner.addClass('bannerReg')
+        })
+        if (half.hasClass('slideLeftReturn')) {
+            half.removeClass()
+        }
 
+    }
 
     function srcollToop(id) {
         var ie6 = document.all;
@@ -42,16 +90,19 @@ $(function () {
                 }
                 else if (dv.css('position') != 'fixed') {
                     dv.css({'position': 'fixed', top: 20});
-                    dv.addClass('boingInUp');
+                    dv.addClass('slideUpReturn');
+                    dv.css({"display": 'unset'})
                 }
             } else if (dv.css('position') != 'static') {
-                dv.removeClass('boingInUp');
+                dv.removeClass('slideUpReturn');
                 dv.css({'position': 'static'});
+                // dv.css({"display":'none'})
             }
         });
     }
 
     srcollToop('textfloat')
+    bannerOut()
 });
 
 

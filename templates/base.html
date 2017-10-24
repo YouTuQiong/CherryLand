@@ -7,64 +7,92 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <link rel='stylesheet' type="text/css" href="{% static 'blog/css/font-awesome.min.css' %} ">
-    <link rel='stylesheet' type="text/css" href="{% static 'blog/css/magic.css' %} ">
+    <link rel='stylesheet' type="text/css" href="{% static 'blog/css/animation.css' %} ">
     <link rel="stylesheet" href="{% static 'blog/css/reset.css' %}">
     <link rel='stylesheet' type="text/css" href="{% static 'blog/css/bootstrap.css' %}">
-    <link rel='stylesheet' type="text/css" href="{% static 'blog/css/style.css' %}">
+    <link rel="stylesheet" media="screen and (max-width:980px), projection"
+          href="{% static 'blog/css/980wide-screen.css' %}"/>
     <link rel='stylesheet' type="text/css" href="{% static 'blog/css/clock.css' %}">
-
+    <link rel="stylesheet" media="screen and (max-width:480px), projection"
+          href="{% static 'blog/css/480wide-screen.css' %}"/>
     <script src="{% static 'blog/js/jquery.min.js' %} "></script>
     <script src="{% static 'blog/js/snap.js' %} "></script>
+    <script src="{% static 'blog/js/fastclick.js' %} "></script>
+<script src="{% static 'blog/js/Jquery.mobile.js' %} "></script>
+    {% block css %}
+    {% endblock %}
 </head>
 
 <body>
+<div class="swiperight"></div>
+<div class="all-cover"></div>
+<div class="half-cover magictime">
+    <ul>
+        {#        <div style="width: 30px;height: 30px;"><li><i id='half-banner' class="fa fa-bars banner active-icon" aria-hidden="true"></i></li></div>#}
+        <li>
+            <i class="fa fa-home " aria-hidden="true"><a class=" main-nav-link" href="/">Home</a></i></li>
 
-<div class="wrap">
+        <li><i class="fa fa-book" aria-hidden="true"><a class=" main-nav-link"
+                                                        href="{% url 'archives' %}">Pigeonhole</a>
+        </i></li>
 
-    <header class="header">
+        <li><i class="fa fa-smile-o " aria-hidden="true"><a class="main-nav-link"
+                                                            href="about.html">About</a></i></li>
+        <li>
+            <div id="sub-nav " style="display: none">
+                <a href="https://github.com/youTuQiong" target="_blank" title="GitHub"
+                   class="fa fa-github "></a>
+                {#                    <a href="#" target="_blank" title="gentlemen.zhang@gmail.com" class="fa fa-envelope"></a>#}
+                {#                    <a class="fa fa-search" id="search"></a>#}
 
-        <div class="header-item header-srp">
-
-            <div class="">
-                <a class="header__logo" href="../../index.html"></a>
             </div>
-            <ul>
-                <li class="header__nav-item_status_active">
-                    <a href="../../Category/1">技术</a>
-                </li>
-                <li>
-                    <a href="{% url 'archives' %}">归档</a>
-                </li>
-            </ul>
+        </li>
+    </ul>
 
-            <div class="header__item__right">
-                <ul>
-                    <li class="search d6 magictime" id="s_text">
-                        <input type="text" onkeydown="jump()" id="inputs" placeholder="搜索从这里开始...">
-                    </li>
-                    <li class="lo">
-                        <a href="https://github.com/youTuQiong" target="_blank" title="GitHub"
-                           class="fa fa-github "></a>
-                    </li>
-                    <li class="lo">
-                        <a href="#" target="_blank" title="gentlemen.zhang@gmail.com" class="fa fa-envelope"></a>
-                    </li>
-                    <li>
-                        <a class="fa fa-search" id="search"></a>
-                    </li>
-                </ul>
+</div>
+<div class="wrap ">
+    <div class="header">
+        <div id="header-inner" class="inner">
+            <nav id="main-nav">
+
+                <i id='banner' class="fa fa-bars banner " aria-hidden="true"></i>
+                <a id="main-nav-toggle" class="nav-icon"></a>
+                {#                    <div class="search d6 magictime" id="s_text">#}
+                {#                        <input type="text" onkeydown="jump()" id="inputs" placeholder="搜索从这里开始...">#}
+                {#                    </div>#}
+                <a class="main-nav-link" href="/">Home</a>
+
+                <a class="main-nav-link" href="{% url 'archives' %}">Pigeonhole</a>
+
+                <a class="main-nav-link" href="about.html">About</a>
+                <div id="sub-nav">
+                    <a href="https://github.com/youTuQiong" target="_blank" title="GitHub"
+                       class="fa fa-github "></a>
+                    {#                    <a href="#" target="_blank" title="gentlemen.zhang@gmail.com" class="fa fa-envelope"></a>#}
+                    {#                    <a class="fa fa-search" id="search"></a>#}
+                </div>
+            </nav>
+            <div class="row-head" style="    text-align: center;">
+                <div class="site-heading magictime slideUpReturn">
+                    <a><h1>GoodLand</h1></a>
+                    <!--<hr class="small">-->
+                    <span class="subheading">一生都想跳出舒适区</span>
+                </div>
             </div>
-
         </div>
-
-    </header>
+        <div class="header-item">
+            {#            <div class="cs">#}
+            {#                <a class="header__logo" href="../../index.html"></a>#}
+            {#            </div>#}
+            <div class="header-pre">
+            </div>
+        </div>
+        <div style="    clear: both;"></div>
+    </div>
 
     <div class="container">
-
         <div class="fuck">
-
             <div class="card">
                 <div class="center-icon">
                     <img src="{% static 'blog/img/user.jpg' %}" alt="head icon">
@@ -74,26 +102,25 @@
 
             <div class="othermenu">
                 <ul>
-                    <li><a href="/../../reader.html">我的文章</a></li>
-                    <li><a href="../../mygays.html">牛逼哄哄的朋友</a></li>
-                    <li><a href="../../about.html">关于我</a></li>
+                    <li><a href="/../../reader.html">My Flag</a></li>
+                    <li><a href="../../mygays.html">Friend</a></li>
+                    <li><a href="../../about.html">About me</a></li>
                     <li></li>
                 </ul>
             </div>
-
             <div id="textfloat" class="magictime">
                 <div class="textwidget">
                     <p>{{ phrase }}</p>
                 </div>
-                <div id="clock" class="light textwidget ">
+                <div id="clock" class="light textwidget magictime">
                     <div class="display">
                         <div class="weekdays"></div>
                         <div class="digits" style="margin-top: 20px;"></div>
                     </div>
                 </div>
             </div>
-
         </div>
+
         {% block content %}
             {#        内容页的html代码#}
         {% endblock %}
@@ -105,6 +132,9 @@
 {% block page %}
     {#        分页功能的html代码#}
 {% endblock %}
+
+<div style="clear: both; height: 60px;"></div>
+
 <div id="foot" class="fw">
     <div id="bottom" class="fw">
         <div id="footer" class="wc center clf">
