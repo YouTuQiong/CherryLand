@@ -10,22 +10,25 @@
     <link rel='stylesheet' type="text/css" href="{% static 'blog/css/font-awesome.min.css' %} ">
     <link rel='stylesheet' type="text/css" href="{% static 'blog/css/animation.css' %} ">
     <link rel="stylesheet" href="{% static 'blog/css/reset.css' %}">
-    <link rel='stylesheet' type="text/css" href="{% static 'blog/css/bootstrap.css' %}">
-    <link rel="stylesheet" media="screen and (max-width:980px), projection"
+{#    <link rel='stylesheet' type="text/css" href="{% static 'blog/css/bootstrap.css' %}">#}
+    <link rel='stylesheet' type="text/css" href="{% static 'blog/css/prism.css' %}">
+
+    <link rel="stylesheet" media="screen and (min-width:781px), projection"
           href="{% static 'blog/css/980wide-screen.css' %}"/>
     <link rel='stylesheet' type="text/css" href="{% static 'blog/css/clock.css' %}">
-    <link rel="stylesheet" media="screen and (max-width:480px), projection"
+    <link rel="stylesheet" media="screen and (max-width:780px), projection"
           href="{% static 'blog/css/480wide-screen.css' %}"/>
     <script src="{% static 'blog/js/jquery.min.js' %} "></script>
-    <script src="{% static 'blog/js/snap.js' %} "></script>
     <script src="{% static 'blog/js/fastclick.js' %} "></script>
-<script src="{% static 'blog/js/Jquery.mobile.js' %} "></script>
+
+    <script src="{% static 'blog/js/snap.js' %} "></script>
+    <script src="{% static 'blog/js/prism.js' %} "></script>
     {% block css %}
     {% endblock %}
 </head>
 
 <body>
-<div class="swiperight"></div>
+{#<div class="swiperight"></div>#}
 <div class="all-cover"></div>
 <div class="half-cover magictime">
     <ul>
@@ -75,13 +78,15 @@
             </nav>
             <div class="row-head" style="    text-align: center;">
                 <div class="site-heading magictime slideUpReturn">
-                    <a><h1>GoodLand</h1></a>
+                    <a><h1>{% block Head_title %}{% endblock %}</h1></a>
                     <!--<hr class="small">-->
-                    <span class="subheading">一生都想跳出舒适区</span>
+                    <span class="subheading">{% block subHeading %}{% endblock %}</span>
                 </div>
             </div>
         </div>
-        <div class="header-item">
+        <div class="header-item" style="background: url(
+                {% block head_Img %}{% endblock %}) center  #000;background-size: cover;-webkit-background-size: cover;
+                -moz-background-size: cover;">
             {#            <div class="cs">#}
             {#                <a class="header__logo" href="../../index.html"></a>#}
             {#            </div>#}

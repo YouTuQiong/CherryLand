@@ -1,28 +1,19 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.db.models import Field
 from django.urls import reverse
 from django.core.paginator import Paginator
 from django.utils.html import format_html
 from filer.fields.image import FilerImageField
-
+from filer.fields.file import FilerFileField
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
 
     def __str__(self):
         return self.name
-
-
-class f(models.Model):
-    logo = FilerImageField(null=True, blank=True,
-                           related_name="logo_company")
-
-
 # 标签
 class Tag(models.Model):
     name = models.CharField(max_length=100)
-
     def __str__(self):
         return self.name
 
@@ -36,6 +27,10 @@ class Month(models.Field):
 
 
 class Article(models.Model):
+    head_Img = FilerImageField(null=True, blank=True,
+                           related_name="head_Article")
+    disclaimer = FilerFileField(null=True, blank=True,
+                                related_name="disclaimer_Article")
     # 文章标题
     title = models.CharField(max_length=70, verbose_name='标题')
     # 文章正文，我们使用了 TextField。

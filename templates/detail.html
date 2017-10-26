@@ -18,7 +18,7 @@
 
                 <h1 class="entry-title detail-a" style="    text-align: center;"><a>{{ Article.title }}</a></h1>
 
-                <div class="post-content ">{{ Article.retrunHTMLForBody }}
+                <div class="post-content ">{{ Article.body |safe }}
                 </div>
 
                 <div class="entry-meta">

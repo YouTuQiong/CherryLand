@@ -1,16 +1,19 @@
 {% extends "base.html" %}
 {% block title %} CherryLand - GoodLand's blog{% endblock %}
+{% block Head_title %}GoodLand{%endblock  %}
+{% block subHeading%}一生都想跳出舒适区{%endblock  %}
+{% block head_Img %}http://blog.tuqiong.info/media/filer/filer_public/b3/81/b3815354-3b5b-4e1e-accf-752a63458c6f/head.png{% endblock %}
 {% block content-father %}
     <div class="content-father">
         {% for Article in post_list %}
             <div class="content ">
-                <article class="post post-{{ Article.pk }}">
+                <article class="post post-{{ Article.pk }} slideUpReturn">
                     <h1 class="entry-title">
                         <a class="a-title" href="{{ Article.get_absolute_url }}">{{ Article.title }}</a>
                     </h1>
                 </article>
                 <div class="post-content">
-                    {{ Article.retrunHTMLForE }}
+                    {{ Article.excerpt| safe }}
                 </div>
                 <div class="entry-meta">
                         <span class="post-category">

@@ -4,7 +4,7 @@ from django.db.models import Model
 from django.db.models.functions import Coalesce
 from django.http import HttpRequest
 from django.utils.html import format_html
-from .models import Article, Category as c, Tag as t, LikePhrase, f
+from .models import Article, Category as c, Tag as t, LikePhrase
 from django.shortcuts import render, get_object_or_404
 from django.db.models import F
 from django.core.paginator import Paginator
