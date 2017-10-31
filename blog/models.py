@@ -27,37 +27,38 @@ class Month(models.Field):
 
 
 class Article(models.Model):
+    # 文章头照片
     head_Img = FilerImageField(null=True, blank=True,
                            related_name="head_Article")
+    # 文章所需要的图片
     disclaimer = FilerFileField(null=True, blank=True,
                                 related_name="disclaimer_Article")
     # 文章标题
     title = models.CharField(max_length=70, verbose_name='标题')
-    # 文章正文，我们使用了 TextField。
-    # 存储比较短的字符串可以使用 CharField，但对于文章的正文来说可能会是一大段文本，因此使用 TextField 来存储大段文本。
+    # 文章正文，
     body = models.TextField(verbose_name='正文')
 
     # 这两个列分别表示文章的创建时间和最后一次修改时间，存储时间的字段用 DateTimeField 类型。
+    # 创建时间自动写
     created_time = models.DateTimeField(auto_now_add=True, verbose_name='创建时间')
     modified_time = models.DateTimeField(verbose_name='最后修改时间')
-    # Month.get_lookup(created_time.date().month + created_time.date().day)
-    # 文章摘要，可以没有文章摘要，但默认情况下 CharField 要求我们必须存入数据，否则就会报错。
-    # 指定 CharField 的 blank=True 参数值后就可以允许空值了。
+
+    # 文章摘要
     excerpt = models.TextField(verbose_name='摘要')
 
-    # 这是分类与标签，分类与标签的模型我们已经定义在上面。
-    # 我们在这里把文章对应的数据库表和分类、标签对应的数据库表关联了起来，但是关联形式稍微有点不同。
-    # 我们规定一篇文章只能对应一个分类，但是一个分类下可以有多篇文章，所以我们使用的是 ForeignKey，即一对多的关联关系。
-    # 而对于标签来说，一篇文章可以有多个标签，同一个标签下也可能有多篇文章，所以我们使用 ManyToManyField，表明这是多对多的关联关系。
+    # 这是分类与标签
+    # 我们规定一篇文章一个分类，一个分类多篇文章，即一对多的关联关系。
+    # 篇文章可以有多个标签，同一个标签下也可能有多篇文章，所以我们使用 ManyToManyField，表明这是多对多的关联关系。
     # 同时我们规定文章可以没有标签，因此为标签 tags 指定了 blank=True。
-    # 官方文档：https://docs.djangoproject.com/en/1.10/topics/db/models/#relationships
     category = models.ForeignKey(Category, verbose_name='分类')
     tags = models.ManyToManyField(Tag, blank=True, verbose_name='标签')
+
     # 文章作者，这里 User 是从 django.contrib.auth.models 导入的。
     # django.contrib.auth 是 Django 内置的应用，专门用于处理网站用户的注册、登录等流程，User 是 Django 为我们已经写好的用户模型。
     # 这里我们通过 ForeignKey 把文章和 User 关联了起来。
-    # 因为我们规定一篇文章只能有一个作者，而一个作者可能会写多篇文章，因此这是一对多的关联关系，和 Category 类似。
+    # 一对多关系，和 Category 类似。
     author = models.ForeignKey(User, verbose_name='作者')
+    # 阅读量
     views = models.PositiveIntegerField(default=0, verbose_name='阅读量')
 
     def get_absolute_url(self):
@@ -72,8 +73,31 @@ class Article(models.Model):
     def retrunHTMLForE(self):
         return format_html(self.excerpt)  # 使用html转义而不是在模板中使用safe，防止xss攻击
 
+# 注册用户，这里我们使用了Consumer因为User Django已经有了。为了不冲突
+class  Consumer(models.Model):
+    # id = models.AutoField(primary_key=True)
+    UserName = models.CharField(max_length=64,verbose_name="用户名")
+    Email = models.EmailField(max_length=64,verbose_name="邮箱")
+    Password  =models.CharField(max_length=64,verbose_name="密码")
+    #AddTime = models.DateTimeField(auto_now_add=True,verbose_name="注册时间")
+    #HeadURL
+class Login(models.Model):
+    UserId = models.BigIntegerField(verbose_name="用户ID")
+    Sessionid = models.CharField(max_length=32,verbose_name="session")#有可能没有
+    Csrftoken = models.CharField(max_length=64, verbose_name="Csrftoken")
+    COMPUTERNAME = models.CharField(max_length=128,verbose_name="计算机域")
+    USERNAME = models.CharField(max_length=128,verbose_name="设备名")
+    IpAddress = models.GenericIPAddressField(verbose_name="ip地址")
+    HTTP_USER_AGENT = models.CharField(max_length=128,verbose_name="登陆头")
+    HTTP_REFERER  = models.CharField(max_length=128,verbose_name="登录页面")
+    LoginTime = models.DateTimeField(verbose_name="登录时间")
+class Discuss(models.Model):
+    Article = models.BigIntegerField(max_length=10,verbose_name="文章ID")
+    IsShow = models.BooleanField(default=True,verbose_name="是否显示")
+    AddTime = models.DateTimeField(auto_now_add=True)
+    UserID = models.BigIntegerField(verbose_name="用户ID")
 
-# 喜欢的橘子
+# 喜欢的句子
 class LikePhrase(models.Model):
     phrase = models.TextField()
 
@@ -84,9 +108,9 @@ class LikePhrase(models.Model):
     #     return format_html(self.phrase)  # 使用html转义而不是在模板中使用safe，防止xss攻击
     #
 
-from django.db import models
 
 
+#分页
 class JuncheePaginator(Paginator):
     def __init__(self, object_list, per_page, range_num=5, orphans=0, allow_empty_first_page=True):
         Paginator.__init__(self, object_list, per_page, orphans, allow_empty_first_page)

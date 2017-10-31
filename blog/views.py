@@ -1,16 +1,18 @@
 import random
 
+import pytz
 from django.db.models import Model
 from django.db.models.functions import Coalesce
 from django.http import HttpRequest
+from django.http import HttpResponseRedirect
 from django.utils.html import format_html
-from .models import Article, Category as c, Tag as t, LikePhrase
+from .models import Article, Category as c, Tag as t, LikePhrase,Consumer,Login
 from django.shortcuts import render, get_object_or_404
 from django.db.models import F
 from django.core.paginator import Paginator
 from django.core.paginator import PageNotAnInteger
 from django.core.paginator import EmptyPage
-
+from blog.forms import *
 
 # Create your views here.
 def index(request):
@@ -200,3 +202,54 @@ def dateFormat(datatime, Format='Format'):
         connectSymbol = '-';
         return datatime.year + connectSymbol + datatime.month + connectSymbol + datatime.day
 
+def Register(request):
+    # if this is a POST request we need to process the form data
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = RegisterForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            UserName = form.cleaned_data['UserName']
+            Email = form.cleaned_data['Email']
+            password = form.cleaned_data['password']
+            #cc_myself = form.cleaned_data['cc_myself']
+
+            #recipients = ['info@example.com']
+            isHasCousumer =Consumer.objects.filter(UserName=UserName)
+            if(len(isHasCousumer) ==1 and isHasCousumer[0].Email == Email and isHasCousumer[0].Password == password):
+                s = isHasCousumer[0].pk
+                return HttpResponseRedirect('detial.html')
+            else:
+                return  HttpResponseRedirect('mygays.html');
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = RegisterForm()
+    return render(request, 'consumer.html', {'form': form})
+def Login(request):
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            UserName = form.cleaned_data['UserName']
+            Email = form.cleaned_data['Email']
+            password = form.cleaned_data['password']
+            isHasCousumer =Consumer.objects.filter(UserName=UserName,Email=Email,Password=password)
+            if(isHasCousumer):
+                LoginInfo  =  Login();
+                META = request.META;
+                PATH =META['PATH_INFO']
+                Csrftoken = META['CSRF_COOKIE']
+                now = pytz.timezone('Asia/Shanghai')
+                if request.META.has_key('HTTP_X_FORWARDED_FOR'):
+                    IPAddress = META['HTTP_X_FORWARDED_FOR']
+                else:
+                    IPAddress = META['REMOTE_ADDR']
+                LoginInfo.UserId = UserName
+                Login.save(force_insert=True,)
+                return HttpResponseRedirect('detial.html')
+            else:
+                return  HttpResponseRedirect('mygays.html');
+    else:
+       # form = RegisterForm()
+        pass
+    return render(request, 'consumer.html', {'form': form})
