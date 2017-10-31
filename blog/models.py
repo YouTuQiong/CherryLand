@@ -79,6 +79,7 @@ class  Consumer(models.Model):
     UserName = models.CharField(max_length=64,verbose_name="用户名")
     Email = models.EmailField(max_length=64,verbose_name="邮箱")
     Password  =models.CharField(max_length=64,verbose_name="密码")
+    #IsAvailable = models.BooleanField(default=True)
     #AddTime = models.DateTimeField(auto_now_add=True,verbose_name="注册时间")
     #HeadURL
 class Login(models.Model):

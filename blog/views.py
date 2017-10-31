@@ -1,10 +1,12 @@
 import random
 
+from blog.JsonSerialize import LazyEncoder
 import pytz
 from django.db.models import Model
 from django.db.models.functions import Coalesce
 from django.http import HttpRequest
 from django.http import HttpResponseRedirect
+from django.http import JsonResponse
 from django.utils.html import format_html
 from .models import Article, Category as c, Tag as t, LikePhrase,Consumer,Login
 from django.shortcuts import render, get_object_or_404
@@ -166,7 +168,8 @@ def about(request):
     return render(request, 'about.html', context={})
 
 
-def mygays(request):
+def mygays(request,s):
+    s
     return render(request, 'mygays.html', context={})
 
 
@@ -212,15 +215,12 @@ def Register(request):
             UserName = form.cleaned_data['UserName']
             Email = form.cleaned_data['Email']
             password = form.cleaned_data['password']
-            #cc_myself = form.cleaned_data['cc_myself']
-
-            #recipients = ['info@example.com']
             isHasCousumer =Consumer.objects.filter(UserName=UserName)
             if(len(isHasCousumer) ==1 and isHasCousumer[0].Email == Email and isHasCousumer[0].Password == password):
-                s = isHasCousumer[0].pk
-                return HttpResponseRedirect('detial.html')
+                return JsonResponse("你已经注册过这个帐号了")
             else:
-                return  HttpResponseRedirect('mygays.html');
+                return  JsonResponse({"msg":"注册成功"})
+
 
     # if a GET (or any other method) we'll create a blank form
     else:
@@ -248,7 +248,7 @@ def Login(request):
                 Login.save(force_insert=True,)
                 return HttpResponseRedirect('detial.html')
             else:
-                return  HttpResponseRedirect('mygays.html');
+                return  HttpResponseRedirect('mygays.html',);
     else:
        # form = RegisterForm()
         pass

@@ -35,5 +35,5 @@ urlpatterns = [
     url(r'^mygays', views.mygays, name='mygays'),
     url(r'^mygays.html', views.mygays, name='mygays'),
     url(r'^random.html', views.randomHtml, name='randomHtml'),
-    url(r'^Consumer.html', views.get_name, name='Consumer'),
+    url(r'^Consumer.html', views.Register, name='Consumer'),
 ]
