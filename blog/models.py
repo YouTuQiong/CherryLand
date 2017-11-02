@@ -93,7 +93,7 @@ class Login(models.Model):
     HTTP_REFERER  = models.CharField(max_length=128,verbose_name="登录页面")
     LoginTime = models.DateTimeField(verbose_name="登录时间")
 class Discuss(models.Model):
-    Article = models.BigIntegerField(max_length=10,verbose_name="文章ID")
+    Article = models.BigIntegerField(verbose_name="文章ID")
     IsShow = models.BooleanField(default=True,verbose_name="是否显示")
     AddTime = models.DateTimeField(auto_now_add=True)
     UserID = models.BigIntegerField(verbose_name="用户ID")

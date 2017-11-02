@@ -5,10 +5,12 @@
     <title>Title</title>
 </head>
 <body>
-<form action="Consumer.html" method="post">
-  {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="Submit" />
-</form>
+<div>{{ text }}</div>
+{#<form action="Consumer.html" method="post">#}
+{#</form>#}
+<form action="SendEmail">
+    <input type="email" value="Email">
+       <input type="submit" value="发送邮件" />
+        </form>
 </body>
 </html>

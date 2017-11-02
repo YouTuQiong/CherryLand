@@ -16,8 +16,11 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from django.conf.urls import url, include
-from blog import views as views
+from rest_framework import routers
 
+from blog import views as views
+router = routers.DefaultRouter()
+router.register(r'users', views.UserViewSet)
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.index),
@@ -36,4 +39,6 @@ urlpatterns = [
     url(r'^mygays.html', views.mygays, name='mygays'),
     url(r'^random.html', views.randomHtml, name='randomHtml'),
     url(r'^Consumer.html', views.Register, name='Consumer'),
+    url(r'^', include(router.urls)),
+    #url(r'^SendEmail',API.SendEmail),
 ]
