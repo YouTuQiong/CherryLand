@@ -60,7 +60,7 @@ class Article(models.Model):
     author = models.ForeignKey(User, verbose_name='作者')
     # 阅读量
     views = models.PositiveIntegerField(default=0, verbose_name='阅读量')
-
+    isShow  = models.BooleanField(default=True,verbose_name='是否显示')
     def get_absolute_url(self):
         return reverse('detail', kwargs={'pk': self.pk})
 

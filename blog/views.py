@@ -19,7 +19,7 @@ from django.core.paginator import EmptyPage
 
 # Create your views here.
 def index(request):
-    post_list = Article.objects.all().order_by('-created_time')
+    post_list = Article.objects.filter(isShow=True).order_by('-created_time')
     phrase = getphrase()
     paginator = Paginator(post_list, 6)
     page = request.GET.get('page')
@@ -56,7 +56,7 @@ def detail(request, pk):
 
 
 def archives(request):
-    post_list = Article.objects.all().order_by('-created_time')
+    post_list = Article.objects.filter(isShow=True).order_by('-created_time')
     datalist = Article.objects.datetimes('created_time', 'year', 'DESC')
     # datalist = reversed(datalist)
     count = len(post_list)
@@ -89,7 +89,7 @@ def archives(request):
 
 def Category(request, pk):
     cate = get_object_or_404(c, pk=pk)
-    post_list = Article.objects.filter(category=cate).order_by('-created_time')
+    post_list = Article.objects.filter(category=cate,isShow=True).order_by('-created_time')
     paginator = Paginator(post_list, 20)
     page = request.GET.get('page')
     try:
@@ -116,7 +116,7 @@ def Category(request, pk):
 
 def Tag(request, pk):
     cate = get_object_or_404(t, pk=pk)
-    post_list = Article.objects.filter(tags=cate).order_by('-created_time')
+    post_list = Article.objects.filter(tags=cate,isShow=True).order_by('-created_time')
     count = len(post_list)
     name = cate
     paginator = Paginator(post_list, 20)
@@ -142,7 +142,7 @@ def Tag(request, pk):
 
 
 def reader(request):
-    post_list = Article.objects.order_by('views')
+    post_list = Article.objects.filter(isShow=True).order_by('views')
     max = len(post_list)
     if (max > 11):
         post_list = post_list[max - 10:max]
@@ -175,7 +175,7 @@ def mygays(request,s):
 
 
 def randomHtml(request):
-    post_list = Article.objects.all()
+    post_list = Article.objects.filter(isShow=True)()
     count = len(post_list)
     if (count > 0):
         nowPage = int(random.randint(0, count))

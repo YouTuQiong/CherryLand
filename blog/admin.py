@@ -8,7 +8,7 @@ from django_summernote.admin import SummernoteModelAdmin
 from django_summernote.admin import SummernoteModelAdmin
 
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'category', 'modified_time')
+    list_display = ('id', 'title', 'category', 'modified_time','isShow','views')
     list_display_links = ('id', 'title')
     list_select_related = ('author', 'category')
     search_fields = ('title', 'body')

@@ -5,18 +5,25 @@
     .fuck{
         display: none;
     }
+	.site-heading h1 {
+    font-size: 30px;
+}
+
     </style>
 {% endblock %}
+{% block Head_title %}{{ Article.title }}{%endblock  %}
+{% block subHeading%}一生都想跳出舒适区{%endblock  %}
+{% block head_Img %}{{Article.head_Img.url}}{% endblock %}
 {% block clock %}
 {% endblock %}
 {% block content %}
-    <div class="content">
+    <div class="content" style="width: 100%;">
 
         <article class="post post-{{ Article.pk }}">
 
             <header class="entry-header">
 
-                <h1 class="entry-title detail-a" style="    text-align: center;"><a>{{ Article.title }}</a></h1>
+                <h1 class="entry-title detail-a" style="    text-align: center;"></h1>
 
                 <div class="post-content ">{{ Article.body |safe }}
                 </div>
