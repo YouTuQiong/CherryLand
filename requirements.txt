@@ -7,7 +7,7 @@ chardet==3.0.4
 consulate==0.6.0
 cryptography==2.0.3
 -e git://github.com/hersonls/djamin.git@5b5887c84341065844ab44b6cfc8ccb865ccfdb9#egg=djamin
-Django==1.10.8
+Django==1.11.29
 django-ckeditor==5.3.0
 django-filer==1.2.8
 django-flat-responsive==2.0
